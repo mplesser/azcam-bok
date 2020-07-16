@@ -19,6 +19,11 @@ from azcam.webserver.web_server import WebServer
 
 from obstool.obstool import MainWindow
 
+common = os.path.abspath(os.path.dirname(__file__))
+common = os.path.abspath(os.path.join(common, "../common"))
+azcam.utils.add_searchfolder(common)
+from telescope_bok import BokTCS
+
 # ****************************************************************
 # parse command line arguments
 # ****************************************************************
@@ -190,8 +195,6 @@ azcam.db.coord_object = "instrument"
 # ****************************************************************
 # telescope
 # ****************************************************************
-from telescope_bok import BokTCS
-
 telescope = BokTCS()
 
 # ****************************************************************
@@ -203,11 +206,11 @@ system = SystemHeader("90prime", template)
 # detector
 # ****************************************************************
 if "90primeone" in option:
-    from azcam_bok.primefocus.detector_bok90prime import detector_bok90prime_one
+    from detector_bok90prime import detector_bok90prime_one
 
     exposure.set_detpars(detector_bok90prime_one)
 else:
-    from azcam_bok.primefocus.detector_bok90prime import detector_bok90prime
+    from detector_bok90prime import detector_bok90prime
 
     if "overscan" in option:
         detector_bok90prime["format"] = [4032 * 2, 6, 0, 20, 4096 * 2, 0, 0, 20, 0]
@@ -222,7 +225,7 @@ display = Ds9Display()
 # system-specific
 # ****************************************************************
 if CSS:
-    from azcam_bok.primefocus.css import CSS
+    from css import CSS
 
     css = CSS()
     azcam.db.cli_cmds["css"] = css
@@ -248,7 +251,7 @@ webserver.start()
 # ****************************************************************
 # apps
 # ****************************************************************
-import azcam_bok.primefocus.restart_cameraserver
+import restart_cameraserver
 
 obstool = MainWindow()
 obstool.start()

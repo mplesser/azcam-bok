@@ -18,8 +18,12 @@ from azcam.webserver.web_server import WebServer
 
 from obstool.obstool import MainWindow
 
-from azcam_bok.bcspec.instrument_bcspec import BCSpecInstrument
-from azcam_bok.common.telescope_bok import BokTCS
+from instrument_bcspec import BCSpecInstrument
+
+common = os.path.abspath(os.path.dirname(__file__))
+common = os.path.abspath(os.path.join(common, "../common"))
+azcam.utils.add_searchfolder(common)
+from telescope_bok import BokTCS
 
 # ****************************************************************
 # define folders for system

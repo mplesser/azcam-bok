@@ -7,11 +7,13 @@ Contains the PrimeFocus instrument class for the UAO 90" 90prime instrument.
 
 import socket
 import sys
+import os
 import time
 
 import azcam
 from azcam.instruments.instrument import Instrument
-from azcam_bok.common.bokdata import BokData
+
+from bokdata import BokData
 
 
 class PrimeFocusInstrument(Instrument):
