@@ -16,8 +16,6 @@ from azcam.exposures.exposure_arc import ExposureArc
 from azcam.cmdserver import CommandServer
 from azcam.webserver.web_server import WebServer
 
-from obstool.obstool import MainWindow
-
 from instrument_bcspec import BCSpecInstrument
 
 common = os.path.abspath(os.path.dirname(__file__))
@@ -71,12 +69,8 @@ controller.set_boards()
 controller.video_gain = 1
 controller.video_speed = 1
 controller.camserver.set_server("10.30.1.34", 2405)
-controller.utility_file = os.path.join(
-    azcam.db.systemfolder, "dspcode", "dsputility", "util1.lod"
-)
-controller.pci_file = os.path.join(
-    azcam.db.systemfolder, "dspcode", "dsppci", "pci1.lod"
-)
+controller.utility_file = os.path.join(azcam.db.systemfolder, "dspcode", "dsputility", "util1.lod")
+controller.pci_file = os.path.join(azcam.db.systemfolder, "dspcode", "dsppci", "pci1.lod")
 controller.timing_file = os.path.join(
     azcam.db.systemfolder, "dspcode", "dsptiming", "tim1_norm_LR.lod"
 )
@@ -164,9 +158,7 @@ telescope = BokTCS()
 # ****************************************************************
 # system header template
 # ****************************************************************
-template = os.path.join(
-    azcam.db.datafolder, "templates", "FitsTemplate_bcspec_master.txt"
-)
+template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_bcspec_master.txt")
 system = SystemHeader("bcspec", template)
 
 # ****************************************************************
@@ -190,11 +182,10 @@ webserver = WebServer()
 webserver.start()
 
 # ****************************************************************
-# apps
+# GUIs
 # ****************************************************************
-obstool = MainWindow()
-obstool.start()
-
+if 1:
+    import start_azcamtool
 
 # ****************************************************************
 # define names to imported into namespace when using cli

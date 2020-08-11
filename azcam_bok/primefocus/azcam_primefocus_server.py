@@ -17,8 +17,6 @@ from azcam.tempcons.tempcon_cryoconm24 import TempConCryoCon
 from azcam.cmdserver import CommandServer
 from azcam.webserver.web_server import WebServer
 
-from obstool.obstool import MainWindow
-
 common = os.path.abspath(os.path.dirname(__file__))
 common = os.path.abspath(os.path.join(common, "../common"))
 azcam.utils.add_searchfolder(common)
@@ -249,12 +247,15 @@ webserver = WebServer()
 webserver.start()
 
 # ****************************************************************
-# apps
+# camera server
 # ****************************************************************
 import restart_cameraserver
 
-obstool = MainWindow()
-obstool.start()
+# ****************************************************************
+# GUIs
+# ****************************************************************
+if 1:
+    import start_azcamtool
 
 # ****************************************************************
 # define names to imported into namespace when using cli
