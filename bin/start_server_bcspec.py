@@ -6,10 +6,11 @@ Usage: Execute this file from File Explorer
 
 import os
 import sys
+from pathlib import Path, PurePosixPath
 
-rootfolder = "/data/code/azcam-bok/azcam_bok/bcspec"
-rootfolder = os.path.abspath(os.path.relpath(rootfolder))
-rootfolder = os.path.normpath(rootfolder).replace("\\", "/")
+rootfolder = Path(__file__).resolve().parent.parent
+rootfolder = rootfolder / "azcam_bok/bcspec"
+rootfolder = str(PurePosixPath(rootfolder))
 
 # select which python to use (virtual environments)
 python = "ipython.exe"
@@ -26,7 +27,9 @@ configscript = "azcam_bcspec_server"
 
 profile = "azcamserver"
 
-import_command = f"sys.path.append('{rootfolder}');" f"import azcam_bcspec_server; from azcam.cli import *"
+import_command = (
+    f"sys.path.append('{rootfolder}');" f"import azcam_bcspec_server; from azcam.cli import *"
+)
 
 # execute
 cl = (
