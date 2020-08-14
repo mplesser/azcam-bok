@@ -8,6 +8,7 @@ from genpars import GenPars
 
 import azcam
 import azcam.server
+import azcam.shortcuts_server
 from azcam.displays.ds9display import Ds9Display
 from azcam.systemheader import SystemHeader
 from azcam.controllers.controller_arc import ControllerArc
