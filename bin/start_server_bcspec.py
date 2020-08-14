@@ -28,7 +28,7 @@ configscript = "azcam_bcspec_server"
 profile = "azcamserver"
 
 import_command = (
-    f"sys.path.append('{rootfolder}');" f"import azcam_bcspec_server; from azcam.cli import *"
+    f"sys.path.append('{rootfolder}');" f"import server_bcspec; from azcam.cli import *"
 )
 
 # execute

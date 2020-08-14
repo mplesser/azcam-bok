@@ -5,7 +5,6 @@ import sys
 import datetime
 
 from PySide2.QtWidgets import QApplication
-from genpars import GenPars
 
 import azcam
 import azcam.server
@@ -17,6 +16,7 @@ from azcam.exposures.exposure_arc import ExposureArc
 from azcam.tempcons.tempcon_cryoconm24 import TempConCryoCon
 from azcam.cmdserver import CommandServer
 from azcam.webserver.web_server import WebServer
+from azcam.genpars import GenPars
 
 common = os.path.abspath(os.path.dirname(__file__))
 common = os.path.abspath(os.path.join(common, "../common"))
@@ -176,7 +176,7 @@ exposure.set_remote_server()
 # ****************************************************************
 # focus script - server-side
 # ****************************************************************
-from focus import FocusServer
+from focus.focus_server import FocusServer
 
 focus = FocusServer()
 azcam.db.cli_cmds["focus"] = focus

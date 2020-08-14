@@ -1,4 +1,4 @@
-# azcamconsole config file
+# azcamconsole config file for mont4k
 
 import os
 import sys
@@ -9,31 +9,31 @@ from PySide2.QtWidgets import QApplication
 
 import azcam
 import azcam.console
-from azcam.console import api
 import azcam.shortcuts_console
 from azcam.displays.ds9display import Ds9Display
-from focus import Focus
+from azcam import db
+from azcam.console import api
 from observe.observe import Observe
-from genpars import GenPars
+from azcam.genpars import GenPars
 
 azcam.log("Loading azcam-bok environment")
 
 # ****************************************************************
 # files and folders
 # ****************************************************************
-azcam.db.systemname = "90prime"
+azcam.db.systemname = "bcspec"
 azcam.db.systemfolder = f"{os.path.dirname(__file__)}"
 azcam.utils.add_searchfolder(azcam.db.systemfolder, 0)  # top level only
 azcam.utils.add_searchfolder(os.path.join(azcam.db.systemfolder, "common"), 1)
 azcam.db.datafolder = os.path.join("/data", azcam.db.systemname)
-azcam.db.parfile = f"{azcam.db.datafolder}/parameters_{azcam.db.systemname}_console.ini"
+azcam.db.parfile = f"{azcam.db.datafolder}/parameters_{azcam.db.systemname}.ini"
 
 # ****************************************************************
 # start logging
 # ****************************************************************
 tt = datetime.datetime.strftime(datetime.datetime.now(), "%d%b%y_%H%M%S")
-azcam.db.logfile = os.path.join(azcam.db.datafolder, "logs", f"console_{tt}.log")
-azcam.utils.start_logging(azcam.db.logfile)
+azcam.db.logfile = os.path.join(db.datafolder, "logs", f"console_{tt}.log")
+azcam.utils.start_logging(db.logfile)
 azcam.log(f"Configuring console for {azcam.db.systemname}")
 
 # ****************************************************************
@@ -50,33 +50,10 @@ app = QApplication(sys.argv)
 azcam.db.qtapp = app
 
 # ****************************************************************
-# add scripts to sys.path for Run
-# ****************************************************************
-azcam.utils.add_searchfolder(os.path.join(azcam.db.systemfolder, "scripts"))
-
-# ****************************************************************
 # observe script
 # ****************************************************************
 observe = Observe()
-observe.move_telescope_during_readout = 1
 azcam.db.cli_cmds["observe"] = observe
-
-# ****************************************************************
-# focus script
-# ****************************************************************
-focus = Focus()
-azcam.db.cli_cmds["focus"] = focus
-focus.focus_component = "instrument"
-focus.focus_type = "step"
-
-# ****************************************************************
-# try to connect to azcam
-# ****************************************************************
-connected = api.connect()  # default host and port
-if connected:
-    azcam.log("Connected to azcamserver")
-else:
-    azcam.log("Not connected to azcamserver")
 
 # ****************************************************************
 # read par file
@@ -88,9 +65,14 @@ wd = azcam.db.genpars.get_par(pardict, "wd", "default")
 azcam.utils.curdir(wd)
 
 # ****************************************************************
+# add scripts to sys.path for Run
+# ****************************************************************
+azcam.utils.add_searchfolder(os.path.join(azcam.db.systemfolder, "scripts"))
+
+# ****************************************************************
 # define names to imported into namespace when using cli
 # # ****************************************************************
-azcam.db.cli_cmds.update({"azcam": azcam, "db": azcam.db, "api": api})
+azcam.db.cli_cmds.update({"azcam": azcam, "db": db, "api": api})
 
 # ****************************************************************
 # clean namespace

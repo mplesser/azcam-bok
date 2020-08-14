@@ -8,6 +8,6 @@ pip install -e genpars
 pip install -e observe
 pip install -e obstool
 
-pip install -r azcam-mont4k\requirements.txt
+pip install -r azcam-bok\requirements.txt
 
 :: pause

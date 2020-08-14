@@ -4,10 +4,10 @@ import datetime
 import types
 
 from PySide2.QtWidgets import QApplication
-from genpars import GenPars
 
 import azcam
 import azcam.server
+from azcam.genpars import GenPars
 import azcam.shortcuts_server
 from azcam.displays.ds9display import Ds9Display
 from azcam.systemheader import SystemHeader

@@ -1,1 +1,1 @@
-python C:\azcam\azcam-mont4k\bin\start_server.py -system CSS
+python C:\azcam\azcam-bok\bin\start_server_bcspec.py

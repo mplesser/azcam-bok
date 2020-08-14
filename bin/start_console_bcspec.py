@@ -18,18 +18,15 @@ interactive = "-i"  # "-i" or ""
 
 # parse arguments for command script
 if len(sys.argv) > 1:
+    # arguments = ["-system VIRUS -data \data"]
     arguments = sys.argv[1:]
 else:
     arguments = [""]
-    # arguments = ["-system VIRUS"]
-    # arguments = ["-system VIRUS -data \data"]
-
-configscript = "azcam_bok.bcspec.console"
 
 profile = "azcamconsole"
 
 import_command = (
-    f"sys.path.append('{rootfolder}');" f"import azcam_bcspec_console; from azcam.cli import *"
+    f"sys.path.append('{rootfolder}');" f"import console_bcspec; from azcam.cli import *"
 )
 
 # execute

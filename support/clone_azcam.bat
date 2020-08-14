@@ -14,7 +14,7 @@ git clone https://github.com/mplesser/azcammonitor.git
 
 :: environments
 ::git clone https://github.com/uaitl/azcam-itl.git
-git clone https://github.com/mplesser/azcam-mont4k.git
+git clone https://github.com/mplesser/azcam-bok.git
 
 :: options
 git clone https://github.com/uaitl/motoroladsptools.git
