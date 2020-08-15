@@ -1,4 +1,4 @@
-# README
+# Sensor Information
 
 ## BCSpec
 
