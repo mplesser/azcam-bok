@@ -1,12 +1,6 @@
 @echo off
-echo Install azcam repos
+echo Install azcam for Bok from azcam root folder
 echo.
-
-pip install -e azcam
-pip install -e focus
-pip install -e genpars
-pip install -e observe
-pip install -e obstool
 
 pip install -r azcam-bok\requirements.txt
 

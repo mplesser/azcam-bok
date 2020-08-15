@@ -1,4 +1,5 @@
 import azcam
+import azcam.api
 
 # these are client-side commands
 

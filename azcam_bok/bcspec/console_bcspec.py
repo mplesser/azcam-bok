@@ -16,7 +16,7 @@ from azcam.console import api
 from observe.observe import Observe
 from azcam.genpars import GenPars
 
-azcam.log("Loading azcam-bok environment")
+azcam.log("Loading console environment for BCSpec")
 
 # ****************************************************************
 # files and folders
