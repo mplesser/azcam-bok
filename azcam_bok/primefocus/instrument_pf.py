@@ -57,7 +57,7 @@ class PrimeFocusInstrument(Instrument):
     def initialize(self):
 
         if not self.enabled:
-            azcam.AzCamWarning("Instrument is not enabled")
+            azcam.AzcamWarning("Instrument is not enabled")
             return
 
         # execute a command to make sure communication is OK

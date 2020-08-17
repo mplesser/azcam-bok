@@ -40,7 +40,7 @@ class BokTCS(Telescope):
             return
 
         if not self.enabled:
-            azcam.AzCamWarning("Telescope is not enabled")
+            azcam.AzcamWarning("Telescope is not enabled")
             return
 
         # do not write telescope header with bokpop as it is in 'instrument'
