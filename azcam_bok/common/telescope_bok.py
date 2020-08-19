@@ -428,6 +428,8 @@ class TelcomServerInterface(object):
         Initialize communication interface to telescope server.
         """
 
+        name = "bok"
+
         telname = name.lower()
         if telname == "bok":
             self.Host = "10.30.3.42"
