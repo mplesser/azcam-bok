@@ -94,7 +94,7 @@ elif "css" in option:
         azcam.db.systemfolder, "dspcode", "dsptiming_90prime", "90Prime_config0.lod"
     )
 else:
-    raise azcam.AzCamError("bad server configuration")
+    raise azcam.AzcamError("bad server configuration")
 azcam.db.parfile = parfile
 
 # ****************************************************************
@@ -102,7 +102,7 @@ azcam.db.parfile = parfile
 # ****************************************************************
 tt = datetime.datetime.strftime(datetime.datetime.now(), "%d%b%y_%H%M%S")
 azcam.db.logfile = os.path.join(azcam.db.datafolder, "logs", f"server_{tt}.log")
-azcam.utils.start_logging(azcam.db.logfile, "123")
+azcam.logging.start_logging(azcam.db.logfile, "123")
 
 azcam.log(f"Configuring for 90prime")
 

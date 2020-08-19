@@ -57,7 +57,7 @@ class PrimeFocusInstrument(Instrument):
     def initialize(self):
 
         if not self.enabled:
-            azcam.AzCamWarning("Instrument is not enabled")
+            azcam.AzcamWarning("Instrument is not enabled")
             return
 
         # execute a command to make sure communication is OK
@@ -84,9 +84,7 @@ class PrimeFocusInstrument(Instrument):
 
             # read current value of keywords
             for key in self.header.get_all_keywords():
-                azcam.utils.log(
-                    ("Keyword: %s has value: %s" % (key, self.read_keyword(key)[1]))
-                )
+                azcam.utils.log(("Keyword: %s has value: %s" % (key, self.read_keyword(key)[1])))
 
             reply = self.get_filter()
             azcam.utils.log(("Filter is %s" % reply))
@@ -387,7 +385,7 @@ class PrimeFocusInstrument(Instrument):
             try:
                 reply = self.header.Values[Keyword]
             except:
-                raise azcam.AzCamError("keyword not defined")
+                raise azcam.AzcamError("keyword not defined")
 
         # store value in Header
         self.header.set_keyword(Keyword, reply)
@@ -545,7 +543,7 @@ class InstrumentServerInterface(object):
             return
         except:
             self.close()
-            azcam.AzCamError("instrument not opened")
+            azcam.AzcamError("instrument not opened")
 
     def close(self):
         """
@@ -597,12 +595,10 @@ class InstrumentServerInterface(object):
         """
 
         try:
-            self.Socket.send(
-                str.encode(Command + Terminator)
-            )  # send command with terminator
+            self.Socket.send(str.encode(Command + Terminator))  # send command with terminator
             return
         except:
-            raise azcam.AzCamError("could not send command to instrument")
+            raise azcam.AzcamError("could not send command to instrument")
 
     def recv(self, Length=-1, Terminator="\n"):
         """

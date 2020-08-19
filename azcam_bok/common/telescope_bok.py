@@ -40,7 +40,7 @@ class BokTCS(Telescope):
             return
 
         if not self.enabled:
-            azcam.AzCamWarning("Telescope is not enabled")
+            azcam.AzcamWarning("Telescope is not enabled")
             return
 
         # do not write telescope header with bokpop as it is in 'instrument'
@@ -103,13 +103,13 @@ class BokTCS(Telescope):
         """
 
         if not self.enabled:
-            azcam.utils.log("telescope not enabled")
+            azcam.AzcamWarning("telescope not enabled")
             return
 
         try:
             command = self.Tserver.make_packet("REQUEST " + self.Tserver.keywords[Keyword])
         except KeyError:
-            raise azcam.AzCamError(f"Keyword {Keyword} not defined")
+            raise azcam.AzcamError(f"Keyword {Keyword} not defined")
 
         ReplyLength = self.Tserver.ReplyLengths[Keyword]
         reply = self.Tserver.command(command, ReplyLength + self.Tserver.Offset)
@@ -150,7 +150,7 @@ class BokTCS(Telescope):
         """
 
         if not self.enabled:
-            azcam.utils.log("telescope not enabled")
+            azcam.AzcamWarning("telescope not enabled")
             return
 
         header = []
@@ -206,7 +206,7 @@ class BokTCS(Telescope):
         """
 
         if not self.enabled:
-            azcam.utils.log("telescope not enabled")
+            azcam.AzcamWarning("telescope not enabled")
             return
 
         command = self.Tserver.make_packet("RADECGUIDE %s %s" % (RA, Dec))
@@ -227,7 +227,7 @@ class BokTCS(Telescope):
         """
 
         if not self.enabled:
-            azcam.utils.log("telescope not enabled")
+            azcam.AzcamWarning("telescope not enabled")
             return
 
         if self._DEBUG == 1:
@@ -267,7 +267,7 @@ class BokTCS(Telescope):
         azcam.utils.log("move_start command received:%s %s" % (RA, Dec))
 
         if not self.enabled:
-            azcam.utils.log("telescope not enabled")
+            azcam.AzcamWarning("telescope not enabled")
             return
 
         if self._DEBUG == 1:
@@ -297,7 +297,7 @@ class BokTCS(Telescope):
         """
 
         if not self.enabled:
-            azcam.utils.log("telescope not enabled")
+            azcam.AzcamWarning("telescope not enabled")
             return
 
         if self._DEBUG == 1:
@@ -311,7 +311,7 @@ class BokTCS(Telescope):
             try:
                 motion = int(reply[0])
             except:
-                raise azcam.AzCamError("bad MOTION status keyword: %s" % reply)
+                raise azcam.AzcamError("bad MOTION status keyword: %s" % reply)
 
             if not motion:
                 azcam.utils.log("Telescope reports it is STOPPED")
@@ -329,7 +329,7 @@ class BokTCS(Telescope):
         command = self.Tserver.make_packet(command)
         reply = self.Tserver.command(command, 1024)
 
-        raise azcam.AzCamError("STOPPED motion flag not detected")
+        raise azcam.AzcamError("STOPPED motion flag not detected")
 
 
 class TelcomServerInterface(object):
@@ -455,7 +455,7 @@ class TelcomServerInterface(object):
             self.Socket.connect((self.Host, self.Port))
             return
         except Exception as inst:
-            raise azcam.AzCamError("could not open telescope server socket")
+            raise azcam.AzcamError("could not open telescope server socket")
 
     def close(self):
         """
@@ -550,7 +550,7 @@ class TelcomServerInterface(object):
             reply = self.parse_remove_null(replist)
             return reply[3]
         except:
-            raise azcam.AzCamError("telescope parse error")
+            raise azcam.AzcamError("telescope parse error")
 
     def parse_remove_null(self, List):
         """

@@ -39,7 +39,7 @@ azcam.db.parfile = f"{azcam.db.datafolder}/parameters_{azcam.db.systemname}.ini"
 # ****************************************************************
 tt = datetime.datetime.strftime(datetime.datetime.now(), "%d%b%y_%H%M%S")
 azcam.db.logfile = os.path.join(azcam.db.datafolder, "logs", f"server_{tt}.log")
-azcam.utils.start_logging(azcam.db.logfile, "123")
+azcam.logging.start_logging(azcam.db.logfile, "123")
 
 azcam.log(f"Configuring for BCSpec")
 

@@ -63,7 +63,7 @@ class BCSpecInstrument(Instrument):
             # reply=reply[4:]
             return reply
         else:
-            raise azcam.AzCamError(reply)
+            raise azcam.AzcamError(reply)
 
     def initialize(self):
         """
@@ -181,7 +181,7 @@ class BCSpecInstrument(Instrument):
             return
 
         if not LampName.upper() in self.Lamps and LampName.upper() != "HE/AR/NE":
-            raise azcam.AzCamError(f"Invalid lamp name: {LampName}")
+            raise azcam.AzcamError(f"Invalid lamp name: {LampName}")
 
         if LampName.upper() == "FE/NE":
             for i in range(2):
@@ -212,7 +212,7 @@ class BCSpecInstrument(Instrument):
             return
 
         if not LampName.upper() in self.Lamps and LampName.upper() != "HE/AR/NE":
-            raise azcam.AzCamError(f"Invalid lamp name: {LampName}")
+            raise azcam.AzcamError(f"Invalid lamp name: {LampName}")
 
         if LampName.upper() == "HE/AR/NE":
             cmd = "OFFLAMP HE/AR"
@@ -247,7 +247,7 @@ class BCSpecInstrument(Instrument):
         try:
             reply = self.header.values[Keyword]
         except:
-            raise azcam.AzCamError(f"Keyword {Keyword} not defined")
+            raise azcam.AzcamError(f"Keyword {Keyword} not defined")
 
         # store value in Header
         self.header.set_keyword(Keyword, reply)
@@ -389,9 +389,7 @@ class InstrumentServerInterface(object):
         """
 
         try:
-            self.Socket.send(
-                str.encode(Command + Terminator)
-            )  # send command with terminator
+            self.Socket.send(str.encode(Command + Terminator))  # send command with terminator
             return ["OK"]
         except:
             self.close()
