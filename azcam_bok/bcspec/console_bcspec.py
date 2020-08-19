@@ -9,6 +9,7 @@ from PySide2.QtWidgets import QApplication
 
 import azcam
 import azcam.console
+import azcam.logging
 import azcam.shortcuts_console
 from azcam.displays.ds9display import Ds9Display
 from azcam import db

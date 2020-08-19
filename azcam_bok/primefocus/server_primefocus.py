@@ -8,6 +8,7 @@ from PySide2.QtWidgets import QApplication
 
 import azcam
 import azcam.server
+import azcam.logging
 import azcam.shortcuts_server
 from azcam.displays.ds9display import Ds9Display
 from azcam.systemheader import SystemHeader
