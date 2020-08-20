@@ -171,8 +171,8 @@ exposure.remote_imageserver_filename = "azcamimage.fits"
 exposure.image.server_type = "dataserver"
 remote_imageserver_host = "10.30.1.2"
 remote_imageserver_port = 6543
-# exposure.set_remote_server(remote_imageserver_host, remote_imageserver_port)
-exposure.set_remote_server()
+exposure.set_remote_server(remote_imageserver_host, remote_imageserver_port)
+# exposure.set_remote_server()
 
 # ****************************************************************
 # focus script - server-side
