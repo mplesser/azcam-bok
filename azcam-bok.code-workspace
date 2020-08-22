@@ -8,7 +8,21 @@
 		},
 		{
 			"path": "C:\\azcam\\azcamtool"
+		},
+		{
+			"path": "..\\azcam-itl"
+		},
+		{
+			"path": "..\\azcam-mont4k"
+		},
+		{
+			"path": "..\\azcam-vatt"
+		},
+		{
+			"path": "..\\azcammonitor"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"python.pythonPath": "C:\\Python38\\python.exe"
+	}
 }
