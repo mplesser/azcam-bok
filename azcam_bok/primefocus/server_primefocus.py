@@ -68,18 +68,21 @@ if "90primeone" in option:
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_90primeone", "90PrimeOne_config0.lod",
     )
+    cmdport = 2432
 elif "normal" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_normal.ini")
     template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt")
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_90prime", "90Prime_config0.lod"
     )
+    cmdport = 2402
 elif "fast" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_fast.ini")
     template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt")
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_fast", "90Prime_config1.lod"
     )
+    cmdport = 2402
 elif "overscan" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_overscan.ini")
     template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt")
@@ -94,6 +97,7 @@ elif "css" in option:
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_90prime", "90Prime_config0.lod"
     )
+    cmdport = 2422
 else:
     raise azcam.AzcamError("bad server configuration")
 azcam.db.parfile = parfile
@@ -111,7 +115,7 @@ azcam.log(f"Configuring for 90prime")
 # define and start command server
 # ****************************************************************
 cmdserver = CommandServer()
-cmdserver.port = 2402
+cmdserver.port = cmdport
 azcam.log(f"Starting command server listening on port {cmdserver.port}")
 # cmdserver.welcome_message = "Welcome - azcam-itl server"
 cmdserver.start()

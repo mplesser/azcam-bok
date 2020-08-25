@@ -48,7 +48,7 @@ azcam.log(f"Configuring for BCSpec")
 # define and start command server
 # ****************************************************************
 cmdserver = CommandServer()
-cmdserver.port = 2402
+cmdserver.port = 2442
 azcam.log(f"Starting command server listening on port {cmdserver.port}")
 # cmdserver.welcome_message = "Welcome - azcam-itl server"
 cmdserver.start()
