@@ -75,24 +75,24 @@ class PrimeFocusInstrument(Instrument):
         for loop in range(number_cycles):
 
             if number_cycles > 1:
-                azcam.utils.log(("   *** Test cycle: %d" % loop))
+                azcam.log(("   *** Test cycle: %d" % loop))
 
             # test Galil interface
-            azcam.utils.log("Testing 90prime Galil instrument interface...")
+            azcam.log("Testing 90prime Galil instrument interface...")
 
             self.initialize()
 
             # read current value of keywords
             for key in self.header.get_all_keywords():
-                azcam.utils.log(("Keyword: %s has value: %s" % (key, self.read_keyword(key)[1])))
+                azcam.log(("Keyword: %s has value: %s" % (key, self.read_keyword(key)[1])))
 
             reply = self.get_filter()
-            azcam.utils.log(("Filter is %s" % reply))
+            azcam.log(("Filter is %s" % reply))
 
             reply = self.get_focus()
-            azcam.utils.log(("Focus is %s" % reply))
+            azcam.log(("Focus is %s" % reply))
 
-            azcam.utils.log("Finished testing 90prime Galil interface. OK")
+            azcam.log("Finished testing 90prime Galil interface. OK")
             azcam.utils.prompt("Press Enter to continue...")
 
         return
@@ -187,22 +187,22 @@ class PrimeFocusInstrument(Instrument):
         currentfilter = reply
 
         if currentfilter == Filter:
-            azcam.utils.log("Already at filter", currentfilter)
+            azcam.log("Already at filter", currentfilter)
             return
 
-        azcam.utils.log("Unloading filter", currentfilter)
+        azcam.log("Unloading filter", currentfilter)
         cmd = "SUNLOADFILT"
         reply = self.command(cmd)
 
         time.sleep(10)
 
-        azcam.utils.log("Loading filter", Filter)
+        azcam.log("Loading filter", Filter)
         cmd = "SLOADFILT %s" % Filter
         reply = self.command(cmd)
 
         time.sleep(10)
         reply = self.get_filter(filter_id)
-        azcam.utils.log("Current filter is", reply)
+        azcam.log("Current filter is", reply)
 
         return
 
@@ -233,7 +233,7 @@ class PrimeFocusInstrument(Instrument):
                 break
             else:
                 pass
-                # azcam.utils.log(f'mean focus change: {delta}')
+                # azcam.log(f'mean focus change: {delta}')
 
         return
 
@@ -311,7 +311,7 @@ class PrimeFocusInstrument(Instrument):
 
             # get new values
             reply = self.get_focus_all()
-            azcam.utils.log(("LVDT read: %s" % reply))
+            azcam.log(("LVDT read: %s" % reply))
 
             focus = reply[1].split("*")[1:]  # list of values
             for i, f in enumerate(focus):  # make floats
@@ -553,7 +553,7 @@ class InstrumentServerInterface(object):
         try:
             self.Socket.close()
         except Exception as message:
-            azcam.utils.log(message)
+            azcam.log(message)
             pass
 
         return

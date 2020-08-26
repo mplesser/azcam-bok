@@ -264,7 +264,7 @@ class BokTCS(Telescope):
         Do not use colons in coordinates.
         """
 
-        azcam.utils.log("move_start command received:%s %s" % (RA, Dec))
+        azcam.log("move_start command received:%s %s" % (RA, Dec))
 
         if not self.enabled:
             azcam.AzcamWarning("telescope not enabled")
@@ -304,7 +304,7 @@ class BokTCS(Telescope):
             return
 
         # loop without timeout
-        azcam.utils.log("Checking for telescope motion...")
+        azcam.log("Checking for telescope motion...")
         cycle = 0
         while True:
             reply = self.read_keyword("MOTION")
@@ -314,17 +314,17 @@ class BokTCS(Telescope):
                 raise azcam.AzcamError("bad MOTION status keyword: %s" % reply)
 
             if not motion:
-                azcam.utils.log("Telescope reports it is STOPPED")
-                azcam.utils.log("Coords:", self.read_keyword("RA"), self.read_keyword("DEC"))
+                azcam.log("Telescope reports it is STOPPED")
+                azcam.log("Coords:", self.read_keyword("RA"), self.read_keyword("DEC"))
                 return
             else:
-                azcam.utils.log("Coords:", self.read_keyword("RA"), self.read_keyword("DEC"))
+                azcam.log("Coords:", self.read_keyword("RA"), self.read_keyword("DEC"))
 
             time.sleep(0.1)
             cycle += 1  # not used for now
 
         # stop the telescope
-        azcam.utils.log("Telescope motion TIMEOUT - sending CANCEL")
+        azcam.log("Telescope motion TIMEOUT - sending CANCEL")
         command = "CANCEL"
         command = self.Tserver.make_packet(command)
         reply = self.Tserver.command(command, 1024)
@@ -537,7 +537,7 @@ class TelcomServerInterface(object):
             elif self.typestrings[keyword] == float:
                 reply = float(reply)
         except Exception as message:
-            azcam.utils.log("ERROR reading telescope data (%s):" % keyword, message)
+            azcam.log("ERROR reading telescope data (%s):" % keyword, message)
             return ["ERROR", message]
 
         return ["OK", reply]
