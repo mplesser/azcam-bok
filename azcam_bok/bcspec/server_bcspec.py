@@ -3,8 +3,6 @@ import sys
 import datetime
 import types
 
-from PySide2.QtWidgets import QApplication
-
 import azcam
 import azcam.server
 import azcam.logging
@@ -52,12 +50,6 @@ cmdserver.port = 2442
 azcam.log(f"Starting command server listening on port {cmdserver.port}")
 # cmdserver.welcome_message = "Welcome - azcam-itl server"
 cmdserver.start()
-
-# ****************************************************************
-# create Qt app
-# ****************************************************************
-app = QApplication(sys.argv)
-azcam.db.qtapp = app
 
 # ****************************************************************
 # controller

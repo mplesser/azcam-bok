@@ -5,8 +5,6 @@ import sys
 import datetime
 import threading
 
-from PySide2.QtWidgets import QApplication
-
 import azcam
 import azcam.console
 import azcam.logging
@@ -43,12 +41,6 @@ azcam.log(f"Configuring console for {azcam.db.systemname}")
 display = Ds9Display()
 dthread = threading.Thread(target=display.initialize, args=[])
 dthread.start()  # thread just for speed
-
-# ****************************************************************
-# create Qt app
-# ****************************************************************
-app = QApplication(sys.argv)
-azcam.db.qtapp = app
 
 # ****************************************************************
 # add scripts to sys.path for Run
