@@ -3,7 +3,6 @@
 import socket
 import sys
 import json
-from astropy.io import fits
 
 
 class get_bok_data(socket.socket):
@@ -115,16 +114,6 @@ class get_bok_data(socket.socket):
             else:
                 if key == keyword:
                     return val
-
-    def test():
-        if 1:
-            fitsfd = pyfits.open(sys.argv[1], mode="update")
-            getter.putHeader(fitsfd)
-            fitsfd.flush()
-            print(getter.data)
-
-        else:
-            print(getter.getAll())
 
 
 # instance

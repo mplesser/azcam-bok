@@ -26,7 +26,8 @@ else:
 profile = "azcamserver"
 
 import_command = (
-    f"sys.path.append('{rootfolder}');" f"import server_primefocus; from azcam.cli import *"
+    f"sys.path.append('{rootfolder}');"
+    f"import server_primefocus; from azcam.cli import *"
 )
 
 # execute

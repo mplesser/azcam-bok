@@ -107,7 +107,9 @@ class BokTCS(Telescope):
             return
 
         try:
-            command = self.Tserver.make_packet("REQUEST " + self.Tserver.keywords[Keyword])
+            command = self.Tserver.make_packet(
+                "REQUEST " + self.Tserver.keywords[Keyword]
+            )
         except KeyError:
             raise azcam.AzcamError(f"Keyword {Keyword} not defined")
 
@@ -222,7 +224,7 @@ class BokTCS(Telescope):
     def move(self, RA, Dec, Epoch=2000.0):
         """
         Moves telescope to an absolute RA,DEC position.
-        
+
         Do not use colons in coordinates.
         """
 
@@ -487,7 +489,9 @@ class TelcomServerInterface(object):
         Appends CRLF to command.
         """
 
-        reply = self.Socket.send(str.encode(command + "\r\n"))  # send command with terminator
+        reply = self.Socket.send(
+            str.encode(command + "\r\n")
+        )  # send command with terminator
 
     def recv(self, Length):
         """
@@ -522,7 +526,9 @@ class TelcomServerInterface(object):
         """
 
         ReplyLength = self.ReplyLengths[keyword]
-        reply = telemetry[self.Offsets[keyword] - 1 : self.Offsets[keyword] + ReplyLength]
+        reply = telemetry[
+            self.Offsets[keyword] - 1 : self.Offsets[keyword] + ReplyLength
+        ]
 
         # parse RA and DEC specially
         if keyword == "RA":
