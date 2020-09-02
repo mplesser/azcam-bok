@@ -238,7 +238,7 @@ class BCSpecInstrument(Instrument):
 
         return
 
-    def read_keyword(self, Keyword):
+    def get_keyword(self, Keyword):
         """
         Read an instrument keyword value.
         This command will read hardware to obtain the keyword value.
@@ -275,7 +275,7 @@ class BCSpecInstrument(Instrument):
         reply = self.header.get_all_keywords()
 
         for key in reply:
-            reply = self.read_keyword(key)
+            reply = self.get_keyword(key)
             list1 = [key, reply[0], reply[1], reply[2]]
             header.append(list1)
 
@@ -389,9 +389,7 @@ class InstrumentServerInterface(object):
         """
 
         try:
-            self.Socket.send(
-                str.encode(Command + Terminator)
-            )  # send command with terminator
+            self.Socket.send(str.encode(Command + Terminator))  # send command with terminator
             return ["OK"]
         except:
             self.close()

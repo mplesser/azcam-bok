@@ -95,7 +95,7 @@ class BokTCS(Telescope):
 
         return
 
-    def read_keyword(self, Keyword):
+    def get_keyword(self, Keyword):
         """
         Reads an telescope keyword value.
         Keyword is the name of the keyword to be read.
@@ -107,9 +107,7 @@ class BokTCS(Telescope):
             return
 
         try:
-            command = self.Tserver.make_packet(
-                "REQUEST " + self.Tserver.keywords[Keyword]
-            )
+            command = self.Tserver.make_packet("REQUEST " + self.Tserver.keywords[Keyword])
         except KeyError:
             raise azcam.AzcamError(f"Keyword {Keyword} not defined")
 
@@ -309,7 +307,7 @@ class BokTCS(Telescope):
         azcam.log("Checking for telescope motion...")
         cycle = 0
         while True:
-            reply = self.read_keyword("MOTION")
+            reply = self.get_keyword("MOTION")
             try:
                 motion = int(reply[0])
             except:
@@ -317,10 +315,10 @@ class BokTCS(Telescope):
 
             if not motion:
                 azcam.log("Telescope reports it is STOPPED")
-                azcam.log("Coords:", self.read_keyword("RA"), self.read_keyword("DEC"))
+                azcam.log("Coords:", self.get_keyword("RA"), self.get_keyword("DEC"))
                 return
             else:
-                azcam.log("Coords:", self.read_keyword("RA"), self.read_keyword("DEC"))
+                azcam.log("Coords:", self.get_keyword("RA"), self.get_keyword("DEC"))
 
             time.sleep(0.1)
             cycle += 1  # not used for now
@@ -489,9 +487,7 @@ class TelcomServerInterface(object):
         Appends CRLF to command.
         """
 
-        reply = self.Socket.send(
-            str.encode(command + "\r\n")
-        )  # send command with terminator
+        reply = self.Socket.send(str.encode(command + "\r\n"))  # send command with terminator
 
     def recv(self, Length):
         """
@@ -526,9 +522,7 @@ class TelcomServerInterface(object):
         """
 
         ReplyLength = self.ReplyLengths[keyword]
-        reply = telemetry[
-            self.Offsets[keyword] - 1 : self.Offsets[keyword] + ReplyLength
-        ]
+        reply = telemetry[self.Offsets[keyword] - 1 : self.Offsets[keyword] + ReplyLength]
 
         # parse RA and DEC specially
         if keyword == "RA":

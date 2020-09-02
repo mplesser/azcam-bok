@@ -84,9 +84,7 @@ class PrimeFocusInstrument(Instrument):
 
             # read current value of keywords
             for key in self.header.get_all_keywords():
-                azcam.log(
-                    ("Keyword: %s has value: %s" % (key, self.read_keyword(key)[1]))
-                )
+                azcam.log(("Keyword: %s has value: %s" % (key, self.get_keyword(key)[1])))
 
             reply = self.get_filter()
             azcam.log(("Filter is %s" % reply))
@@ -367,7 +365,7 @@ class PrimeFocusInstrument(Instrument):
 
         return
 
-    def read_keyword(self, Keyword):
+    def get_keyword(self, Keyword):
         """
         Read an instrument keyword value.
         This command will read hardware to obtain the keyword value.
@@ -416,7 +414,7 @@ class PrimeFocusInstrument(Instrument):
 
         for key in reply:
             try:
-                reply = self.read_keyword(key)
+                reply = self.get_keyword(key)
             except:
                 continue
             list1 = [key, reply[0], reply[1], reply[2]]
@@ -597,9 +595,7 @@ class InstrumentServerInterface(object):
         """
 
         try:
-            self.Socket.send(
-                str.encode(Command + Terminator)
-            )  # send command with terminator
+            self.Socket.send(str.encode(Command + Terminator))  # send command with terminator
             return
         except:
             raise azcam.AzcamError("could not send command to instrument")
