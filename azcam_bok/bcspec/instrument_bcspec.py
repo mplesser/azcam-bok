@@ -5,7 +5,6 @@ import json
 import time
 
 import azcam
-from azcam.utils import *
 from azcam.instruments.instrument import Instrument
 
 
@@ -18,9 +17,9 @@ class BCSpecInstrument(Instrument):
     # Valid lamp names
     Lamps = ["NEON", "CONT", "UV", "HE/AR", "FE/NE", "UNDEF", "MIRROR", "SPARE"]
 
-    def __init__(self):
+    def __init__(self, obj_id="instrument", obj_name="bcspec"):
 
-        super().__init__()
+        super().__init__(obj_id, obj_name)
 
         self.use_bokpop = 1
 
@@ -28,7 +27,6 @@ class BCSpecInstrument(Instrument):
         self.Host = "10.30.1.2"  # IP address for instrument server on bokap3
         self.Port = 9875
         self.ActiveComps = [""]
-        self.enabled = 1
 
         # opto22 server interface
         self.Iserver = InstrumentServerInterface(self.Host, self.Port, self.Name)
@@ -70,9 +68,14 @@ class BCSpecInstrument(Instrument):
         Initialize OPTO22.
         """
 
+        if not self.enabled:
+            azcam.AzcamWarning(f"{self.name} is not enabled")
+            return
+
         cmd = "INITOPTO"
-        self.initialized = 1
         reply = self.command(cmd)
+
+        self.initialized = 1
 
         return reply
 
@@ -246,7 +249,7 @@ class BCSpecInstrument(Instrument):
 
         try:
             reply = self.header.values[Keyword]
-        except:
+        except Exception:
             raise azcam.AzcamError(f"Keyword {Keyword} not defined")
 
         # store value in Header
@@ -351,7 +354,7 @@ class InstrumentServerInterface(object):
         try:
             reply = self.Socket.connect((self.Host, self.Port))
             return ["OK"]
-        except:
+        except Exception:
             self.close()
             return ["ERROR", "%s not opened" % self.Name]
 
@@ -362,7 +365,7 @@ class InstrumentServerInterface(object):
 
         try:
             self.Socket.close()
-        except:
+        except Exception:
             pass
 
         return ["OK"]
@@ -391,7 +394,7 @@ class InstrumentServerInterface(object):
         try:
             self.Socket.send(str.encode(Command + Terminator))  # send command with terminator
             return ["OK"]
-        except:
+        except Exception:
             self.close()
             return ["ERROR", "could not send command to %s" % self.Name]
 
@@ -409,7 +412,7 @@ class InstrumentServerInterface(object):
                 msg = self.Socket.recv(1024).decode()
                 self.Socket.settimeout(self.Timeout)
                 return ["OK", msg]
-            except:
+            except Exception:
                 return ["OK", ""]
 
         # receive Length bytes
@@ -435,7 +438,7 @@ class InstrumentServerInterface(object):
                     return ["ERROR", "%s server communication loop timeout" % self.Name]
 
         Reply = msg[:-2]  # remove CR/LF
-        if Reply == None:
+        if Reply is None:
             Reply = ""
         return ["OK", Reply]
 
@@ -548,7 +551,7 @@ class BokData(socket.socket):
                 val = float(val)
             except ValueError:
                 pass
-            except:
+            except Exception:
                 pass
 
             keyword1 = fitskw
@@ -568,7 +571,7 @@ class BokData(socket.socket):
         for key, val in pyDict.items():
             if type(val) == dict:
                 resp = self.extract(val, keyword)
-                if resp != None:
+                if resp is not None:
                     return resp
             else:
                 if key == keyword:

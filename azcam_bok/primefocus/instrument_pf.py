@@ -22,20 +22,15 @@ class PrimeFocusInstrument(Instrument):
     The InstrumentServer is the galil, later Jeff Fookson's Ruby Galil server.
     """
 
-    def __init__(self):
-        """
-        Create 90PrimeInstrument instrument object
-        """
+    def __init__(self, obj_id="instrument", obj_name="primefocus"):
 
-        # create Header object and set defaults
-        super().__init__()
+        super().__init__(obj_id, obj_name)
 
         self.Name = "90prime"
         self.Port = 9874  # port for galil server on bok
         self.host = "10.30.1.2"  # bok
         self.ActiveComps = [""]
         self.InstalledFilters = {}
-        self.enabled = 1
         self.ActiveFilter = "unknown"  # current filter
 
         self.Locked = False  # communications lock for galilserver
@@ -57,11 +52,12 @@ class PrimeFocusInstrument(Instrument):
     def initialize(self):
 
         if not self.enabled:
-            azcam.AzcamWarning("Instrument is not enabled")
+            azcam.AzcamWarning(f"{self.name} is not enabled")
             return
 
         # execute a command to make sure communication is OK
         reply = self.get_focus()
+
         self.initialized = 1
 
         return

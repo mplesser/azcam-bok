@@ -16,20 +16,14 @@ class BokTCS(Telescope):
     The interface to the Steward Observatory Bok TCS telescope server.
     """
 
-    def __init__(self):
-        """
-        Creates the telescope object.
-        Name is the name of the telescope.
-        """
+    def __init__(self, obj_id="telescope", obj_name="Bok telescope"):
 
-        super().__init__()
+        super().__init__(obj_id, obj_name)
 
         # telescope header object
         self.header = Header("Telescope")
         self.use_bokpop = 1
-        self.enabled = 0
-        self.initialized = 0
-        self._DEBUG = 0
+        self.DEBUG = 0
 
     def initialize(self):
         """
@@ -40,7 +34,7 @@ class BokTCS(Telescope):
             return
 
         if not self.enabled:
-            azcam.AzcamWarning("Telescope is not enabled")
+            azcam.AzcamWarning(f"{self.name} is not enabled")
             return
 
         # do not write telescope header with bokpop as it is in 'instrument'
@@ -230,7 +224,7 @@ class BokTCS(Telescope):
             azcam.AzcamWarning("telescope not enabled")
             return
 
-        if self._DEBUG == 1:
+        if self.DEBUG == 1:
             return
 
         replylen = 1024
@@ -270,7 +264,7 @@ class BokTCS(Telescope):
             azcam.AzcamWarning("telescope not enabled")
             return
 
-        if self._DEBUG == 1:
+        if self.DEBUG == 1:
             return
 
         replylen = 1024
@@ -300,7 +294,7 @@ class BokTCS(Telescope):
             azcam.AzcamWarning("telescope not enabled")
             return
 
-        if self._DEBUG == 1:
+        if self.DEBUG == 1:
             return
 
         # loop without timeout
