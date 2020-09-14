@@ -5,11 +5,10 @@ import types
 
 import azcam
 import azcam.server
-import azcam.logging
 from azcam.genpars import GenPars
 import azcam.shortcuts_server
 from azcam.displays.ds9display import Ds9Display
-from azcam.systemheader import SystemHeader
+from azcam.header import Header
 from azcam.controllers.controller_arc import ControllerArc
 from azcam.tempcons.tempcon_arc import TempConArc
 from azcam.exposures.exposure_arc import ExposureArc
@@ -154,7 +153,8 @@ telescope = BokTCS()
 # system header template
 # ****************************************************************
 template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_bcspec_master.txt")
-system = SystemHeader("bcspec", template)
+sysheader = Header("bcspec", template)
+sysheader.set_header("system", 0)
 
 # ****************************************************************
 # display

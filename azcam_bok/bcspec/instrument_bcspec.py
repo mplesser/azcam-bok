@@ -274,6 +274,10 @@ class BCSpecInstrument(Instrument):
         Type is one of 'str', 'int', 'float', or 'complex'.
         """
 
+        if not self.enabled:
+            azcam.AzcamWarning("instrument not enabled")
+            return
+
         header = []
         reply = self.header.get_all_keywords()
 
@@ -541,7 +545,7 @@ class BokData(socket.socket):
         # header.
         # all_data = self.getAll()
 
-        all_data = self.get_header()
+        all_data = self.get_header_data()
         header = []
         for Map in self.kwmap:
             kw, fitskw, descr = Map
@@ -577,7 +581,7 @@ class BokData(socket.socket):
                 if key == keyword:
                     return val
 
-    def get_header(self):
+    def get_header_data(self):
         """
         Added for AzCam
         """
@@ -601,6 +605,8 @@ class BokData(socket.socket):
         """
 
         data = self.makeHeader()
+
+        return
 
 
 """

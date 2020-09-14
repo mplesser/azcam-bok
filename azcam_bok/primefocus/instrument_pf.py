@@ -405,13 +405,17 @@ class PrimeFocusInstrument(Instrument):
         Type is one of 'str', 'int', 'float', or 'complex'.
         """
 
+        if not self.enabled:
+            azcam.AzcamWarning("instrument not enabled")
+            return
+
         header = []
         reply = self.header.get_all_keywords()
 
         for key in reply:
             try:
                 reply = self.get_keyword(key)
-            except:
+            except Exception:
                 continue
             list1 = [key, reply[0], reply[1], reply[2]]
             header.append(list1)
