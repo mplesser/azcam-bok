@@ -6,6 +6,7 @@ import datetime
 
 import azcam
 import azcam.server
+from azcam.server import api
 import azcam.shortcuts_server
 from azcam.displays.ds9display import Ds9Display
 from azcam.header import Header
@@ -261,7 +262,7 @@ if 1:
 # ****************************************************************
 # define names to imported into namespace when using cli
 # # ****************************************************************
-azcam.db.cli_cmds.update({"azcam": azcam, "db": azcam.db, "api": azcam.server.api})
+azcam.db.cli_cmds.update({"azcam": azcam, "db": azcam.db, "api": api})
 
 # ****************************************************************
 # finish
