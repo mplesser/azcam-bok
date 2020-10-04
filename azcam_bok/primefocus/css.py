@@ -28,7 +28,7 @@ class CSS(object):
         Initialize AzCam system.
         """
 
-        reply = azcam.db.exposure.reset()
+        reply = azcam.api.exposure.reset()
 
         return reply
 
@@ -46,9 +46,9 @@ class CSS(object):
         azcam.utils.set_par("imageincludesequencenumber", 0)
         azcam.utils.set_par("imageautoincrementsequencenumber", 0)
 
-        azcam.db.exposure.set_filename(filename)
+        azcam.api.exposure.set_filename(filename)
 
-        azcam.db.exposure.expose1(exposuretime, imagetype, title)
+        azcam.api.exposure.expose1(exposuretime, imagetype, title)
 
         return "OK"
 
@@ -57,7 +57,7 @@ class CSS(object):
         Return remaining exposure time (in seconds).
         """
 
-        reply = azcam.db.exposure.get_exposuretime_remaining()
+        reply = azcam.api.exposure.get_exposuretime_remaining()
 
         etr = "%.3f" % reply
 
@@ -69,12 +69,12 @@ class CSS(object):
         Reply is "STATUS camtemp dewtemp expflag".
         """
 
-        reply = azcam.db.tempcon.get_temperatures()
+        reply = azcam.api.tempcon.get_temperatures()
 
         camtemp = "%.3f" % reply[0]
         dewtemp = "%.3f" % reply[1]
 
-        ef = azcam.db.exposure.exposure_flag
+        ef = azcam.api.exposure.exposure_flag
 
         return ["OK", camtemp, dewtemp, ef]
 
@@ -83,7 +83,7 @@ class CSS(object):
         Set binning.
         """
 
-        azcam.db.exposure.set_roi(-1, -1, -1, -1, colbin, rowbin)
+        azcam.api.exposure.set_roi(-1, -1, -1, -1, colbin, rowbin)
 
         return
 
@@ -103,6 +103,6 @@ class CSS(object):
         Flush sensor "cycles" times.
         """
 
-        azcam.db.exposure.flush(cycles)
+        azcam.api.exposure.flush(cycles)
 
         return

@@ -4,9 +4,7 @@ import os
 import sys
 import datetime
 
-import azcam
-import azcam.server
-from azcam.server import api
+from azcam.server import azcam
 import azcam.shortcuts_server
 from azcam.displays.ds9display import Ds9Display
 from azcam.header import Header
@@ -17,10 +15,7 @@ from azcam.cmdserver import CommandServer
 from azcam.webserver.web_server import WebServer
 from azcam.genpars import GenPars
 
-common = os.path.abspath(os.path.dirname(__file__))
-common = os.path.abspath(os.path.join(common, "../common"))
-azcam.utils.add_searchfolder(common)
-from telescope_bok import BokTCS
+from azcam_bok.common.telescope_bok import BokTCS
 
 # ****************************************************************
 # parse command line arguments
@@ -36,8 +31,6 @@ except ValueError:
 # ****************************************************************
 azcam.db.rootfolder = os.path.abspath(os.path.dirname(__file__))
 azcam.db.rootfolder = os.path.normpath(azcam.db.rootfolder).replace("\\", "/")
-azcam.utils.add_searchfolder(os.path.join(azcam.db.rootfolder, "common"))
-azcam.utils.add_searchfolder(os.path.join(azcam.db.rootfolder, "primefocus"))
 
 azcam.db.systemname = "90prime"
 azcam.db.systemfolder = os.path.dirname(__file__)
@@ -62,7 +55,9 @@ if option == "menu":
 CSS = 0
 if "90primeone" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_one.ini")
-    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90PrimeOne_master.txt")
+    template = os.path.join(
+        azcam.db.datafolder, "templates", "FitsTemplate_90PrimeOne_master.txt"
+    )
     timingfile = os.path.join(
         azcam.db.systemfolder,
         "dspcode",
@@ -72,21 +67,27 @@ if "90primeone" in option:
     cmdport = 2432
 elif "normal" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_normal.ini")
-    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt")
+    template = os.path.join(
+        azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt"
+    )
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_90prime", "90Prime_config0.lod"
     )
     cmdport = 2402
 elif "fast" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_fast.ini")
-    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt")
+    template = os.path.join(
+        azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt"
+    )
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_fast", "90Prime_config1.lod"
     )
     cmdport = 2402
 elif "overscan" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_overscan.ini")
-    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt")
+    template = os.path.join(
+        azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt"
+    )
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_90prime", "90Prime_config0.lod"
     )
@@ -94,7 +95,9 @@ elif "css" in option:
     print("90Prime for CSS")
     CSS = 1
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_css.ini")
-    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_css.txt")
+    template = os.path.join(
+        azcam.db.datafolder, "templates", "FitsTemplate_90Prime_css.txt"
+    )
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_90prime", "90Prime_config0.lod"
     )
@@ -110,14 +113,14 @@ tt = datetime.datetime.strftime(datetime.datetime.now(), "%d%b%y_%H%M%S")
 azcam.db.logfile = os.path.join(azcam.db.datafolder, "logs", f"server_{tt}.log")
 azcam.logging.start_logging(azcam.db.logfile, "123")
 
-azcam.log(f"Configuring for 90prime")
+azcam.log("Configuring for 90prime")
 
 # ****************************************************************
 # define and start command server
 # ****************************************************************
 cmdserver = CommandServer()
 cmdserver.port = cmdport
-azcam.log(f"Starting command server listening on port {cmdserver.port}")
+azcam.log(f"Starting cmdserver - listening on port {cmdserver.port}")
 # cmdserver.welcome_message = "Welcome - azcam-itl server"
 cmdserver.start()
 
@@ -132,7 +135,9 @@ controller.set_boards()
 controller.video_gain = 1
 controller.video_speed = 1
 controller.camserver.set_server("localhost", 2405)
-controller.pci_file = os.path.join(azcam.db.systemfolder, "dspcode", "dsppci", "pci3.lod")
+controller.pci_file = os.path.join(
+    azcam.db.systemfolder, "dspcode", "dsppci", "pci3.lod"
+)
 controller.timing_file = timingfile
 
 # ****************************************************************
@@ -186,7 +191,7 @@ focus.focus_type = "step"
 # ****************************************************************
 # instrument
 # ****************************************************************
-from instrument_pf import PrimeFocusInstrument
+from azcam_bok.primefocus.instrument_pf import PrimeFocusInstrument
 
 instrument = PrimeFocusInstrument()
 azcam.db.coord_object = "instrument"
@@ -206,11 +211,11 @@ sysheader.set_header("system", 0)
 # detector
 # ****************************************************************
 if "90primeone" in option:
-    from detector_bok90prime import detector_bok90prime_one
+    from azcam_bok.primefocus.detector_bok90prime import detector_bok90prime_one
 
     exposure.set_detpars(detector_bok90prime_one)
 else:
-    from detector_bok90prime import detector_bok90prime
+    from azcam_bok.primefocus.detector_bok90prime import detector_bok90prime
 
     if "overscan" in option:
         detector_bok90prime["format"] = [4032 * 2, 6, 0, 20, 4096 * 2, 0, 0, 20, 0]
@@ -225,7 +230,7 @@ display = Ds9Display()
 # system-specific
 # ****************************************************************
 if CSS:
-    from css import CSS
+    from azcam_bok.primefocus.css import CSS
 
     css = CSS()
     azcam.db.cli_cmds["css"] = css
@@ -251,18 +256,13 @@ webserver.start()
 # ****************************************************************
 # camera server
 # ****************************************************************
-import restart_cameraserver
+import azcam_bok.primefocus.restart_cameraserver
 
 # ****************************************************************
 # GUIs
 # ****************************************************************
 if 1:
-    import start_azcamtool
-
-# ****************************************************************
-# define names to imported into namespace when using cli
-# # ****************************************************************
-azcam.db.cli_cmds.update({"azcam": azcam, "db": azcam.db, "api": api})
+    import azcam_bok.common.start_azcamtool
 
 # ****************************************************************
 # finish

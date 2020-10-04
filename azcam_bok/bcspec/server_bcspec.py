@@ -3,9 +3,7 @@ import sys
 import datetime
 import types
 
-import azcam
-import azcam.server
-from azcam.server import api
+from azcam.server import azcam
 from azcam.genpars import GenPars
 import azcam.shortcuts_server
 from azcam.displays.ds9display import Ds9Display
@@ -16,12 +14,9 @@ from azcam.exposures.exposure_arc import ExposureArc
 from azcam.cmdserver import CommandServer
 from azcam.webserver.web_server import WebServer
 
-from instrument_bcspec import BCSpecInstrument
+from azcam_bok.bcspec.instrument_bcspec import BCSpecInstrument
 
-common = os.path.abspath(os.path.dirname(__file__))
-common = os.path.abspath(os.path.join(common, "../common"))
-azcam.utils.add_searchfolder(common)
-from telescope_bok import BokTCS
+from azcam_bok.common.telescope_bok import BokTCS
 
 # ****************************************************************
 # define folders for system
@@ -47,7 +42,7 @@ azcam.log(f"Configuring for BCSpec")
 # ****************************************************************
 cmdserver = CommandServer()
 cmdserver.port = 2442
-azcam.log(f"Starting command server listening on port {cmdserver.port}")
+azcam.log(f"Starting cmdserver - listening on port {cmdserver.port}")
 # cmdserver.welcome_message = "Welcome - azcam-itl server"
 cmdserver.start()
 
@@ -64,8 +59,12 @@ controller.video_gain = 1
 controller.video_speed = 1
 controller.camserver.set_server("10.30.1.34", 2405)
 # controller.camserver.set_server("bokccd5", 2405)
-controller.utility_file = os.path.join(azcam.db.systemfolder, "dspcode", "dsputility", "util1.lod")
-controller.pci_file = os.path.join(azcam.db.systemfolder, "dspcode", "dsppci", "pci1.lod")
+controller.utility_file = os.path.join(
+    azcam.db.systemfolder, "dspcode", "dsputility", "util1.lod"
+)
+controller.pci_file = os.path.join(
+    azcam.db.systemfolder, "dspcode", "dsppci", "pci1.lod"
+)
 controller.timing_file = os.path.join(
     azcam.db.systemfolder, "dspcode", "dsptiming", "tim1_norm_LR.lod"
 )
@@ -153,7 +152,9 @@ telescope = BokTCS()
 # ****************************************************************
 # system header template
 # ****************************************************************
-template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_bcspec_master.txt")
+template = os.path.join(
+    azcam.db.datafolder, "templates", "FitsTemplate_bcspec_master.txt"
+)
 sysheader = Header("bcspec", template)
 sysheader.set_header("system", 0)
 
@@ -181,12 +182,7 @@ webserver.start()
 # GUIs
 # ****************************************************************
 if 1:
-    import start_azcamtool
-
-# ****************************************************************
-# define names to imported into namespace when using cli
-# # ****************************************************************
-azcam.db.cli_cmds.update({"azcam": azcam, "db": azcam.db, "api": api})
+    import azcam_bok.common.start_azcamtool
 
 # ****************************************************************
 # finish

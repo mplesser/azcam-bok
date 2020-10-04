@@ -28,8 +28,7 @@ else:
 profile = "azcamconsole"
 
 import_command = (
-    f"sys.path.append('{rootfolder}');"
-    f"import console_primefocus; from azcam.cli import *"
+    f"import azcam_bok.primefocus.console_primefocus; from azcam.cli import *"
 )
 
 # execute

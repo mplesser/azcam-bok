@@ -4,8 +4,7 @@ test entire 90prime system
 
 import sys
 
-import azcam
-import azcam.console
+from azcam.console import azcam
 
 
 def test_90prime():

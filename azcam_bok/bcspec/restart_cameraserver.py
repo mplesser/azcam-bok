@@ -6,7 +6,6 @@ This is just a fix for PC hang issue...
 """
 
 import os
-import subprocess
 
 filepath = "C:\\azcam\\camera_servers\\installer64_19.3\\RestartServiceAdmin.bat.lnk"
 
