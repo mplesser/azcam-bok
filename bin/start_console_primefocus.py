@@ -6,11 +6,6 @@ Usage: Execute this file from File Explorer
 
 import os
 import sys
-from pathlib import Path, PurePosixPath
-
-rootfolder = Path(__file__).resolve().parent.parent
-rootfolder = rootfolder / "azcam_bok/primefocus"
-rootfolder = str(PurePosixPath(rootfolder))
 
 # select which python to use (virtual environments)
 python = "ipython.exe"
@@ -27,9 +22,7 @@ else:
 
 profile = "azcamconsole"
 
-import_command = (
-    f"import azcam_bok.primefocus.console_primefocus; from azcam.cli import *"
-)
+import_command = f"import azcam_bok.primefocus.console_primefocus; from azcam.cli import *"
 
 # execute
 cl = (
