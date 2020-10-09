@@ -1,1 +1,1 @@
-PowerShell -WindowStyle Hidden c:\azcam\expstatus\expstatus\expstatus.pyw -port 2422
+PowerShell -WindowStyle Hidden c:\azcam\azcam-expstatus\azcam_expstatus\expstatus.pyw -port 2442

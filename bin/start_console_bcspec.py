@@ -20,7 +20,7 @@ else:
 
 profile = "azcamconsole"
 
-import_command = f"import azcam_bok.bcspec.console_bcspec; from azcam.cli import *"
+import_command = f"import azcam_bok.bcspec.console; from azcam.cli import *"
 
 # execute
 cl = (

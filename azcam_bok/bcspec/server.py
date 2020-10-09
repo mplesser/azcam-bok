@@ -59,12 +59,8 @@ controller.video_gain = 1
 controller.video_speed = 1
 controller.camserver.set_server("10.30.1.34", 2405)
 # controller.camserver.set_server("bokccd5", 2405)
-controller.utility_file = os.path.join(
-    azcam.db.systemfolder, "dspcode", "dsputility", "util1.lod"
-)
-controller.pci_file = os.path.join(
-    azcam.db.systemfolder, "dspcode", "dsppci", "pci1.lod"
-)
+controller.utility_file = os.path.join(azcam.db.systemfolder, "dspcode", "dsputility", "util1.lod")
+controller.pci_file = os.path.join(azcam.db.systemfolder, "dspcode", "dsppci", "pci1.lod")
 controller.timing_file = os.path.join(
     azcam.db.systemfolder, "dspcode", "dsptiming", "tim1_norm_LR.lod"
 )
@@ -152,9 +148,7 @@ telescope = BokTCS()
 # ****************************************************************
 # system header template
 # ****************************************************************
-template = os.path.join(
-    azcam.db.datafolder, "templates", "FitsTemplate_bcspec_master.txt"
-)
+template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_bcspec_master.txt")
 sysheader = Header("bcspec", template)
 sysheader.set_header("system", 0)
 
@@ -175,7 +169,14 @@ azcam.utils.curdir(wd)
 # ****************************************************************
 # web server
 # ****************************************************************
+from azcam.webserver.web_server import WebServer
+
 webserver = WebServer()
+
+import azcam_webobs
+import azcam_exptool
+import azcam_status
+
 webserver.start()
 
 # ****************************************************************

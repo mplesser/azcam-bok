@@ -1,4 +1,4 @@
-# azcamconsole config file for mont4k
+# azcamconsole config file
 
 import os
 import sys
@@ -8,18 +8,19 @@ import threading
 from azcam.console import azcam
 import azcam.shortcuts_console
 from azcam.displays.ds9display import Ds9Display
-from observe.observe import Observe
+from azcam_focus.focus import Focus
+from azcam-observe.observe import Observe
 from azcam.genpars import GenPars
 
-azcam.log("Loading console environment for BCSpec")
+azcam.log("Loading console environment 90Prime")
 
 # ****************************************************************
 # files and folders
 # ****************************************************************
-azcam.db.systemname = "bcspec"
+azcam.db.systemname = "90prime"
 azcam.db.systemfolder = f"{os.path.dirname(__file__)}"
 azcam.db.datafolder = os.path.join("/data", azcam.db.systemname)
-azcam.db.parfile = f"{azcam.db.datafolder}/parameters_{azcam.db.systemname}.ini"
+azcam.db.parfile = f"{azcam.db.datafolder}/parameters_{azcam.db.systemname}_console.ini"
 
 # ****************************************************************
 # start logging
@@ -40,7 +41,31 @@ dthread.start()  # thread just for speed
 # observe script
 # ****************************************************************
 observe = Observe()
+observe.move_telescope_during_readout = 1
 azcam.db.cli_cmds["observe"] = observe
+
+# ****************************************************************
+# focus script
+# ****************************************************************
+focus = Focus()
+azcam.db.cli_cmds["focus"] = focus
+focus.focus_component = "instrument"
+focus.focus_type = "step"
+
+# ****************************************************************
+# try to connect to azcamserver
+# ****************************************************************
+ports = [2402, 2412, 2422, 2432]
+connected = 0
+for port in ports:
+    connected = azcam.api.connect(port=port)
+    if connected:
+        break
+
+if connected:
+    azcam.log("Connected to azcamserver")
+else:
+    azcam.log("Not connected to azcamserver")
 
 # ****************************************************************
 # read par file

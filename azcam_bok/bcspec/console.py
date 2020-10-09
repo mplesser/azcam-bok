@@ -1,4 +1,4 @@
-# azcamconsole config file
+# azcamconsole config file for mont4k
 
 import os
 import sys
@@ -8,19 +8,18 @@ import threading
 from azcam.console import azcam
 import azcam.shortcuts_console
 from azcam.displays.ds9display import Ds9Display
-from focus.focus import Focus
-from observe.observe import Observe
+from azcam-observe.observe import Observe
 from azcam.genpars import GenPars
 
-azcam.log("Loading console environment 90Prime")
+azcam.log("Loading console environment for BCSpec")
 
 # ****************************************************************
 # files and folders
 # ****************************************************************
-azcam.db.systemname = "90prime"
+azcam.db.systemname = "bcspec"
 azcam.db.systemfolder = f"{os.path.dirname(__file__)}"
 azcam.db.datafolder = os.path.join("/data", azcam.db.systemname)
-azcam.db.parfile = f"{azcam.db.datafolder}/parameters_{azcam.db.systemname}_console.ini"
+azcam.db.parfile = f"{azcam.db.datafolder}/parameters_{azcam.db.systemname}.ini"
 
 # ****************************************************************
 # start logging
@@ -41,21 +40,12 @@ dthread.start()  # thread just for speed
 # observe script
 # ****************************************************************
 observe = Observe()
-observe.move_telescope_during_readout = 1
 azcam.db.cli_cmds["observe"] = observe
 
 # ****************************************************************
-# focus script
+# try to connect to azcamserver
 # ****************************************************************
-focus = Focus()
-azcam.db.cli_cmds["focus"] = focus
-focus.focus_component = "instrument"
-focus.focus_type = "step"
-
-# ****************************************************************
-# try to connect to azcam
-# ****************************************************************
-connected = azcam.api.connect()  # default host and port
+connected = azcam.api.connect(port=2442)
 if connected:
     azcam.log("Connected to azcamserver")
 else:
