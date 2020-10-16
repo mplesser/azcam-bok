@@ -9,7 +9,7 @@ import azcam.shortcuts_server
 from azcam.displays.ds9display import Ds9Display
 from azcam.header import Header
 from azcam.controllers.controller_arc import ControllerArc
-from azcam.exposures.exposure_arc import ExposureArc
+from azcam_arc.exposure_arc import ExposureArc
 from azcam.tempcons.tempcon_cryoconm24 import TempConCryoCon
 from azcam.cmdserver import CommandServer
 from azcam.webserver.web_server import WebServer
