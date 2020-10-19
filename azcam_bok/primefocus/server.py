@@ -5,10 +5,10 @@ import sys
 import datetime
 
 from azcam.server import azcam
-import azcam.shortcuts_server
+import azcam.shortcuts
 from azcam.displays.ds9display import Ds9Display
 from azcam.header import Header
-from azcam.controllers.controller_arc import ControllerArc
+from azcam_arc.controller_arc import ControllerArc
 from azcam_arc.exposure_arc import ExposureArc
 from azcam.tempcons.tempcon_cryoconm24 import TempConCryoCon
 from azcam.cmdserver import CommandServer
