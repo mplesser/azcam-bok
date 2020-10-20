@@ -15,32 +15,32 @@ def test_90prime():
     print("")
     print("*** Testing controller ***")
     print("")
-    reply = azcam.console.api.rcommand("controller.Test(2)")
+    reply = azcam.api.rcommand("controller.Test(2)")
     print(reply)
 
     print("")
     print("*** Testing instrument ***")
     print("")
-    reply = azcam.console.api.rcommand("instrument.Test()")
+    reply = azcam.api.rcommand("instrument.Test()")
     print(reply)
     print("")
 
     print("")
     print("*** Testing telescope ***")
     print("")
-    reply = azcam.console.api.rcommand("telescope.Test()")
+    reply = azcam.api.rcommand("telescope.Test()")
     print(reply)
 
     print("")
     print("*** Testing weather ***")
     print("")
-    reply = azcam.console.api.rcommand("instrument.GetWeatherInfo()")
+    reply = azcam.api.rcommand("instrument.GetWeatherInfo()")
     print(reply)
 
     print("")
     print("*** Testing temperatures ***")
     print("")
-    reply = azcam.console.api.rcommand("instrument.GetTemperatureInfo()")
+    reply = azcam.api.rcommand("instrument.GetTemperatureInfo()")
     print("")
 
     return

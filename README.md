@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This repository contains the *azcam-bok* package.  It has the environement, configuration, and system files for the University of Arizona Bok telescope facility camera systems.
+This repository contains the *azcam-bok* *azcam* extension.  It has the environement, configuration, and system files for the University of Arizona Bok telescope facility camera systems.
 
 ## Installation Example
 
