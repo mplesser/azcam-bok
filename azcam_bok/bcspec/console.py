@@ -8,7 +8,7 @@ import threading
 from azcam.console import azcam
 import azcam.shortcuts
 from azcam.displays.ds9display import Ds9Display
-from azcam-observe.observe import Observe
+from azcam_observe.observe import Observe
 from azcam.genpars import GenPars
 
 azcam.log("Loading console environment for BCSpec")
