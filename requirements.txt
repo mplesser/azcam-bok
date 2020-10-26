@@ -1,0 +1,4 @@
+ipython 
+-e /azcam/azcam
+-e /azcam/azcam-focus
+-e /azcam/azcam-observe
