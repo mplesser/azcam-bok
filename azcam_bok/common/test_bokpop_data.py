@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
+import json
 import socket
 import sys
-import json
 
 
 class get_bok_data(socket.socket):

@@ -1,8 +1,8 @@
 # BokData class from Scott
 # 10Sep17 - last change MPL
 
-import socket
 import json
+import socket
 
 
 class BokData(socket.socket):

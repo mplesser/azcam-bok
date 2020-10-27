@@ -1,12 +1,11 @@
 # Contains the BokTCS class which defines the Bok telescope interface.
 
+import os
 import socket
 import sys
-import os
 import time
 
 import azcam
-
 from azcam.header import Header
 from azcam.telescopes.telescope import Telescope
 

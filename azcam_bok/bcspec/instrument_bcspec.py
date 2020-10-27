@@ -1,7 +1,7 @@
 # Contains BCSpecInstrument class for the Bok B&C spectrograph.
 
-import socket
 import json
+import socket
 import time
 
 import azcam

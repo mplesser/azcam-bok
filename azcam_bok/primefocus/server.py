@@ -1,20 +1,21 @@
 # azcamserver config file for 90prime
 
+import datetime
 import os
 import sys
-import datetime
 
-from azcam.server import azcam
-import azcam.shortcuts
-from azcam.header import Header
-from azcam.cmdserver import CommandServer
-from azcam.webserver.web_server import WebServer
-from azcam.genpars import GenPars
-from azcam_ds9.ds9display import Ds9Display
-from azcam_cryocon.tempcon_cryoconm24 import TempConCryoCon
 from azcam_arc.controller_arc import ControllerArc
 from azcam_arc.exposure_arc import ExposureArc
 from azcam_bok.common.telescope_bok import BokTCS
+from azcam_cryocon.tempcon_cryoconm24 import TempConCryoCon
+from azcam_ds9.ds9display import Ds9Display
+
+import azcam.shortcuts
+from azcam.cmdserver import CommandServer
+from azcam.genpars import GenPars
+from azcam.header import Header
+from azcam.server import azcam
+from azcam.webserver.web_server import WebServer
 
 # ****************************************************************
 # parse command line arguments
@@ -210,7 +211,8 @@ sysheader.set_header("system", 0)
 # detector
 # ****************************************************************
 if "90primeone" in option:
-    from azcam_bok.primefocus.detector_bok90prime import detector_bok90prime_one
+    from azcam_bok.primefocus.detector_bok90prime import \
+        detector_bok90prime_one
 
     exposure.set_detpars(detector_bok90prime_one)
 else:
@@ -253,9 +255,9 @@ from azcam.webserver.web_server import WebServer
 
 webserver = WebServer()
 
-import azcam_webobs
 import azcam_exptool
 import azcam_status
+import azcam_webobs
 
 webserver.start()
 

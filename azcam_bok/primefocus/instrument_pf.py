@@ -5,15 +5,15 @@ Contains the PrimeFocus instrument class for the UAO 90" 90prime instrument.
 # SHOW FILTISIN
 # returns 0 (0.0000?) none, 1 in beam, 3 jammed
 
+import os
 import socket
 import sys
-import os
 import time
+
+from azcam_bok.common.bokdata import BokData
 
 import azcam
 from azcam.instruments.instrument import Instrument
-
-from azcam_bok.common.bokdata import BokData
 
 
 class PrimeFocusInstrument(Instrument):
