@@ -6,12 +6,12 @@ import datetime
 
 from azcam.server import azcam
 import azcam.shortcuts
-from azcam.displays.ds9display import Ds9Display
 from azcam.header import Header
-from azcam.tempcons.tempcon_cryoconm24 import TempConCryoCon
 from azcam.cmdserver import CommandServer
 from azcam.webserver.web_server import WebServer
 from azcam.genpars import GenPars
+from azcam_ds9.ds9display import Ds9Display
+from azcam_cryocon.tempcon_cryoconm24 import TempConCryoCon
 from azcam_arc.controller_arc import ControllerArc
 from azcam_arc.exposure_arc import ExposureArc
 from azcam_bok.common.telescope_bok import BokTCS
