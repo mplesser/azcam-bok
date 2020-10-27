@@ -13,7 +13,7 @@ import time
 from azcam_bok.common.bokdata import BokData
 
 import azcam
-from azcam.instruments.instrument import Instrument
+from azcam.instrument import Instrument
 
 
 class PrimeFocusInstrument(Instrument):
