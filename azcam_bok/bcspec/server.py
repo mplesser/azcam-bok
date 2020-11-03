@@ -3,19 +3,19 @@ import os
 import sys
 import types
 
+from azcam.server import azcam
+import azcam.shortcuts
+from azcam.cmdserver import CommandServer
+from azcam.genpars import GenPars
+from azcam.header import Header
+from azcam.webserver.web_server import WebServer
+
 from azcam_arc.controller_arc import ControllerArc
 from azcam_arc.exposure_arc import ExposureArc
 from azcam_arc.tempcon_arc import TempConArc
 from azcam_bok.bcspec.instrument_bcspec import BCSpecInstrument
 from azcam_bok.common.telescope_bok import BokTCS
 from azcam_ds9.ds9display import Ds9Display
-
-import azcam.shortcuts
-from azcam.cmdserver import CommandServer
-from azcam.genpars import GenPars
-from azcam.header import Header
-from azcam.server import azcam
-from azcam.webserver.web_server import WebServer
 
 # ****************************************************************
 # define folders for system
