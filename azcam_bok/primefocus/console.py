@@ -59,7 +59,7 @@ focus.focus_type = "step"
 ports = [2402, 2412, 2422, 2432]
 connected = 0
 for port in ports:
-    connected = azcam.api.connect(port=port)
+    connected = azcam.api.serverconn.connect(port=port)
     if connected:
         break
 
