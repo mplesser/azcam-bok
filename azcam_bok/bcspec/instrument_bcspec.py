@@ -241,29 +241,23 @@ class BCSpecInstrument(Instrument):
 
         return
 
-    def get_keyword(self, Keyword):
+    def get_keyword(self, keyword):
         """
         Read an instrument keyword value.
         This command will read hardware to obtain the keyword value.
         """
 
         try:
-            reply = self.header.values[Keyword]
+            reply = self.header.values[keyword]
         except Exception:
-            raise azcam.AzcamError(f"Keyword {Keyword} not defined")
+            raise azcam.AzcamError(f"Keyword {keyword} not defined")
 
         # store value in Header
-        self.header.set_keyword(Keyword, reply)
+        self.header.set_keyword(keyword, reply)
 
-        # convert type
-        if self.header.typestrings[Keyword] == "int":
-            reply = int(reply)
-        elif self.header.typestrings[Keyword] == "float":
-            reply = float(reply)
+        reply, t = self.header.convert_type(reply, self.header.typestrings[keyword])
 
-        t = self.header.get_type_string(self.header.typestrings[Keyword])
-
-        return [reply, self.header.comments[Keyword], t]
+        return [reply, self.header.comments[keyword], t]
 
     def read_header(self):
         """

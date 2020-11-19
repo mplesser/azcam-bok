@@ -88,7 +88,7 @@ class BokTCS(Telescope):
 
         return
 
-    def get_keyword(self, Keyword):
+    def get_keyword(self, keyword):
         """
         Reads an telescope keyword value.
         Keyword is the name of the keyword to be read.
@@ -101,40 +101,34 @@ class BokTCS(Telescope):
 
         try:
             command = self.Tserver.make_packet(
-                "REQUEST " + self.Tserver.keywords[Keyword]
+                "REQUEST " + self.Tserver.keywords[keyword]
             )
         except KeyError:
-            raise azcam.AzcamError(f"Keyword {Keyword} not defined")
+            raise azcam.AzcamError(f"Keyword {keyword} not defined")
 
-        ReplyLength = self.Tserver.ReplyLengths[Keyword]
+        ReplyLength = self.Tserver.ReplyLengths[keyword]
         reply = self.Tserver.command(command, ReplyLength + self.Tserver.Offset)
         if reply[0] != "OK":
-            self.header.set_keyword(Keyword, "")
+            self.header.set_keyword(keyword, "")
             return reply
         reply = self.Tserver.parse_reply(reply[1], ReplyLength)
         # reply=reply.lstrip()
         # reply=reply.rstrip()
 
         # parse RA and DEC specially
-        if Keyword == "RA":
+        if keyword == "RA":
             reply = "%s:%s:%s" % (reply[0:2], reply[2:4], reply[4:])
-        elif Keyword == "DEC":
+        elif keyword == "DEC":
             reply = "%s:%s:%s" % (reply[0:3], reply[3:5], reply[5:])
         else:
             pass
 
         # store value in Header
-        self.header.set_keyword(Keyword, reply)
+        self.header.set_keyword(keyword, reply)
 
-        # convert type
-        if self.Tserver.typestrings[Keyword] == int:
-            reply = int(reply)
-        elif self.Tserver.typestrings[Keyword] == float:
-            reply = float(reply)
+        reply, t = self.header.convert_type(reply, self.header.typestrings[keyword])
 
-        t = self.header.get_type_string(self.Tserver.typestrings[Keyword])
-
-        return [reply, self.Tserver.comments[Keyword], t]
+        return [reply, self.Tserver.comments[keyword], t]
 
     def read_header(self):
         """
