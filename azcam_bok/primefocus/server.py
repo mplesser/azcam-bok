@@ -8,7 +8,7 @@ from azcam.server import azcam
 import azcam.shortcuts
 from azcam.cmdserver import CommandServer
 from azcam.genpars import GenPars
-from azcam.header import Header
+from azcam.system import System
 from azcam.webserver.web_server import WebServer
 from azcam_arc.controller_arc import ControllerArc
 from azcam_arc.exposure_arc import ExposureArc
@@ -158,11 +158,6 @@ tempcon.init_commands = [
 ]
 
 # ****************************************************************
-# dewar
-# ****************************************************************
-controller.header.set_keyword("DEWAR", "90prime", "Dewar name")
-
-# ****************************************************************
 # exposure
 # ****************************************************************
 exposure = ExposureArc()
@@ -203,8 +198,8 @@ telescope = BokTCS()
 # ****************************************************************
 # system header template
 # ****************************************************************
-sysheader = Header("90prime", template)
-sysheader.set_header("system", 0)
+system = System("90prime", template)
+system.set_keyword("DEWAR", "90prime", "Dewar name")
 
 # ****************************************************************
 # detector
