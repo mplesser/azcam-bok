@@ -12,8 +12,6 @@ import azcam.shortcuts
 from azcam.console import azcam
 from azcam.genpars import GenPars
 
-azcam.log("Loading console environment for BCSpec")
-
 # ****************************************************************
 # files and folders
 # ****************************************************************

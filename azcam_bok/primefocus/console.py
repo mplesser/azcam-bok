@@ -13,8 +13,6 @@ import azcam.shortcuts
 from azcam.console import azcam
 from azcam.genpars import GenPars
 
-azcam.log("Loading console environment 90Prime")
-
 # ****************************************************************
 # files and folders
 # ****************************************************************
