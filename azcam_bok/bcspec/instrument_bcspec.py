@@ -73,7 +73,7 @@ class BCSpecInstrument(Instrument):
             return
 
         cmd = "INITOPTO"
-        reply = self.command(cmd)
+        reply = self.Iserver.command(cmd)
 
         self.initialized = 1
 
