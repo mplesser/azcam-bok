@@ -54,49 +54,37 @@ if option == "menu":
 CSS = 0
 if "90primeone" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_one.ini")
-    template = os.path.join(
-        azcam.db.datafolder, "templates", "FitsTemplate_90PrimeOne_master.txt"
-    )
+    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90PrimeOne_master.txt")
     timingfile = os.path.join(
-        azcam.db.systemfolder,
-        "dspcode",
-        "dsptiming_90primeone",
-        "90PrimeOne_config0.lod",
+        azcam.db.systemfolder, "dspcode", "dsptiming_90primeone", "90PrimeOne_config0.lod",
     )
     cmdport = 2432
 elif "normal" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_normal.ini")
-    template = os.path.join(
-        azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt"
-    )
+    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt")
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_90prime", "90Prime_config0.lod"
     )
     cmdport = 2402
 elif "fast" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_fast.ini")
-    template = os.path.join(
-        azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt"
-    )
+    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt")
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_fast", "90Prime_config1.lod"
     )
     cmdport = 2402
 elif "overscan" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_overscan.ini")
-    template = os.path.join(
-        azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt"
-    )
+    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt")
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_90prime", "90Prime_config0.lod"
     )
+    cmdport = 2402
 elif "css" in option:
     print("90Prime for CSS")
     CSS = 1
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_css.ini")
-    template = os.path.join(
-        azcam.db.datafolder, "templates", "FitsTemplate_90Prime_css.txt"
-    )
+    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_css.txt")
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_90prime", "90Prime_config0.lod"
     )
@@ -110,7 +98,7 @@ azcam.db.parfile = parfile
 # ****************************************************************
 tt = datetime.datetime.strftime(datetime.datetime.now(), "%d%b%y_%H%M%S")
 azcam.db.logger.logfile = os.path.join(azcam.db.datafolder, "logs", f"server_{tt}.log")
-azcam.db.logger.start_logging(azcam.db.logger.logfile, "123")
+azcam.db.logger.start_logging()
 
 azcam.log("Configuring for 90prime")
 
@@ -134,9 +122,7 @@ controller.set_boards()
 controller.video_gain = 1
 controller.video_speed = 1
 controller.camserver.set_server("localhost", 2405)
-controller.pci_file = os.path.join(
-    azcam.db.systemfolder, "dspcode", "dsppci", "pci3.lod"
-)
+controller.pci_file = os.path.join(azcam.db.systemfolder, "dspcode", "dsppci", "pci3.lod")
 controller.timing_file = timingfile
 
 # ****************************************************************
