@@ -58,8 +58,12 @@ controller.video_gain = 1
 controller.video_speed = 1
 controller.camserver.set_server("10.30.1.34", 2405)
 # controller.camserver.set_server("bokccd5", 2405)
-controller.utility_file = os.path.join(azcam.db.systemfolder, "dspcode", "dsputility", "util1.lod")
-controller.pci_file = os.path.join(azcam.db.systemfolder, "dspcode", "dsppci", "pci1.lod")
+controller.utility_file = os.path.join(
+    azcam.db.systemfolder, "dspcode", "dsputility", "util1.lod"
+)
+controller.pci_file = os.path.join(
+    azcam.db.systemfolder, "dspcode", "dsppci", "pci1.lod"
+)
 controller.timing_file = os.path.join(
     azcam.db.systemfolder, "dspcode", "dsptiming", "tim1_norm_LR.lod"
 )
@@ -94,7 +98,7 @@ detector_bcspec = {
     "format": [1200, 18, 0, 20, 800, 0, 0, 0, 0],
     "focalplane": [1, 1, 1, 1, "0"],
     "roi": [1, 1200, 1, 800, 2, 2],
-    "extension_position": [[1, 1]],
+    "ext_position": [[1, 1]],
     "jpg_order": [1, 1],
     "ctype": ["LINEAR", "LINEAR"],
 }
@@ -142,7 +146,9 @@ telescope = BokTCS()
 # ****************************************************************
 # system header template
 # ****************************************************************
-template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_bcspec_master.txt")
+template = os.path.join(
+    azcam.db.datafolder, "templates", "FitsTemplate_bcspec_master.txt"
+)
 system = System("bcspec", template)
 system.set_keyword("DEWAR", "bcspec", "Dewar name")
 

@@ -9,7 +9,7 @@ detector_bok90prime = {
     "format": [4032 * 2, 6, 0, 20, 4096 * 2, 0, 0, 0, 0],
     "focalplane": [2, 2, 4, 4, "3210321001230123"],
     "roi": [1, 4032 * 2, 1, 4096 * 2, 1, 1],
-    "extension_position": [
+    "ext_position": [
         [2, 2],
         [1, 2],
         [2, 1],
@@ -28,8 +28,8 @@ detector_bok90prime = {
         [4, 4],
     ],
     "jpg_order": [4, 3, 8, 7, 2, 1, 6, 5, 9, 10, 13, 14, 11, 12, 15, 16],
-    "detnum": [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4],
-    "detpos": [
+    "det_number": [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4],
+    "det_position": [
         [1, 1],
         [1, 1],
         [1, 1],
@@ -47,7 +47,7 @@ detector_bok90prime = {
         [2, 2],
         [2, 2],
     ],
-    "detgap": [
+    "det_gap": [
         [0, 0],
         [0, 0],
         [0, 0],
@@ -65,7 +65,7 @@ detector_bok90prime = {
         [gapX, gapY],
         [gapX, gapY],
     ],
-    "extname": [
+    "ext_name": [
         "im4",
         "im3",
         "im2",
@@ -83,7 +83,7 @@ detector_bok90prime = {
         "im15",
         "im16",
     ],
-    "extnum": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+    "ext_number": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
 }
 
 detector_bok90prime_one = {
@@ -93,6 +93,6 @@ detector_bok90prime_one = {
     "format": [4032, 6, 0, 20, 4096, 0, 0, 0, 0],
     "focalplane": [1, 1, 2, 2, "0123"],
     "roi": [1, 4032, 1, 4096, 1, 1],
-    "extension_position": [[1, 1], [2, 1], [1, 2], [2, 2]],
+    "ext_position": [[1, 1], [2, 1], [1, 2], [2, 2]],
     "jpg_order": [1, 2, 3, 4],
 }
