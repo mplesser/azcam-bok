@@ -241,6 +241,8 @@ class PrimeFocusInstrument(Instrument):
         One focus actuator step is 2.645 microns, which corresponds to -0.0005 LVDT units. So the conversion is (-1322.5 um/LVDT unit).
         """
 
+        FocusPosition = int(float(FocusPosition))
+
         cmd = "ALLFOCUS %d" % (FocusPosition)  # wrong, change this
 
         reply = self.command(cmd)
@@ -323,6 +325,8 @@ class PrimeFocusInstrument(Instrument):
         Return a single current LVDT focus position as a float.
         """
 
+        focus_id = int(focus_id)
+
         reply = self.get_focus_all()
         reply = reply.strip()
         FocusPosition = reply.split("*")[1:]
@@ -382,8 +386,8 @@ class PrimeFocusInstrument(Instrument):
         else:
             try:
                 reply = self.header.Values[Keyword]
-            except:
-                raise azcam.AzcamError("keyword not defined")
+            except Exception:
+                raise azcam.AzcamError(f"keyword not defined: {Keyword}")
 
         # store value in Header
         self.header.set_keyword(Keyword, reply)
