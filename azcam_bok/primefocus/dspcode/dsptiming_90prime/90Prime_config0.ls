@@ -1,5 +1,5 @@
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 1
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 1
 
 
 
@@ -64,8 +64,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Pag
 59        000000           TRNE      EQU     0                                 ; This is set in X:SSR when the transmitter
 60                                                                             ;  shift and data registers are both empty
 61        000001           TDRE      EQU     1                                 ; This is set in X:SSR when the transmitter
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC22_hdr.asm  Page 2
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC22_hdr.asm  Page 2
 
 
 
@@ -130,8 +130,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC22_hdr.asm
 120       000001           LED1      EQU     1                                 ; Control one of two LEDs
 121       000002           LVEN      EQU     2                                 ; Low voltage power enable
 122       000003           HVEN      EQU     3                                 ; High voltage power enable
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC22_hdr.asm  Page 3
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC22_hdr.asm  Page 3
 
 
 
@@ -196,8 +196,8 @@ er
 186       P:000005 P:000005 542300            MOVE              A1,X:<SAVE_A1           ; Save A1
 187       P:000006 P:000006 452200            MOVE              X1,X:<SAVE_X1           ; Save X1
 188       P:000007 P:000007 54A600            MOVE              X:<SCI_A1,A1            ; Get SRX value of accumulator contents
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.asm  Page 4
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.asm  Page 4
 
 
 
@@ -262,8 +262,8 @@ e
 240       P:000060 P:000060 06CF00            DO      B,RD_COM
                             000068
 241       P:000062 P:000062 205B00            MOVE              (R3)+                   ; Increment past what's been read already
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.asm  Page 5
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.asm  Page 5
 
 
 
@@ -328,8 +328,8 @@ ess
 292       P:00008F P:00008F 469C00            MOVE              X:<SMASK,Y0             ; This was the source byte, and is to
 293       P:000090 P:000090 330700            MOVE              #<COM_BUF,R3            ;     become the destination byte
 294       P:000091 P:000091 46935E            AND     Y0,B      X:<TWO,Y0
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.asm  Page 6
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.asm  Page 6
 
 
 
@@ -394,8 +394,8 @@ k
 338       P:0000C3 P:0000C3 4EF000            MOVE                          Y:RDFO,Y0   ; Read the LS byte
                             FFFFF1
 339       P:0000C5 P:0000C5 0C1951            INSERT  #$008000,Y0,B
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.asm  Page 7
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.asm  Page 7
 
 
 
@@ -460,8 +460,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.as
 384       P:0000F9 P:0000F9 4E6100            MOVE                          Y0,Y:(R1)
 385                                 XMT_WRD2
 386       P:0000FA P:0000FA 08F4BB            MOVEP             #$028FE1,X:BCR          ; Restore RDFO access
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.asm  Page 8
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.asm  Page 8
 
 
 
@@ -526,8 +526,8 @@ ry
 438                                 ; Program WRMEM ('WRM' address datum): write to memory, reply 'DON'.
 439       P:00012B P:00012B 47DB00  WRMEM     MOVE              X:(R3)+,Y1              ; Get the address to be written to
 440       P:00012C P:00012C 20EF00            MOVE              Y1,B
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.asm  Page 9
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.asm  Page 9
 
 
 
@@ -592,8 +592,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.as
 491       P:000161 P:000161 0D0176            JSR     <RD_WORD                          ; Read number of words in application P:
 492       P:000162 P:000162 61F400            MOVE              #(X_BOOT_START+1),R1    ; End of boot P: code that needs keeping
                             000226
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.asm  Page 10
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.asm  Page 10
 
 
 
@@ -658,8 +658,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.as
 542                                 ;   by application code
 543       P:00018E P:00018E 08F4BD  INIT      MOVEP             #PLL_INIT,X:PCTL        ; Initialize PLL to 100 MHz
                             050003
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.asm  Page 11
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.asm  Page 11
 
 
 
@@ -724,8 +724,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.as
 591                                                                                     ; RE = 1 to enable receiver
 592       P:0001A9 P:0001A9 07F43F            MOVEP             #%111001,X:PCRC         ; Control Register (0 for GPIO, 1 for ESSI)
                             000039
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.asm  Page 12
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.asm  Page 12
 
 
 
@@ -790,8 +790,8 @@ ut)
 639                                 ; PD0 = SC10 = 2_XMT_? input
 640                                 ; PD1 = SC11 = SSFEF* input
 641                                 ; PD2 = SC12 = PWR_EN
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.asm  Page 13
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.asm  Page 13
 
 
 
@@ -856,8 +856,8 @@ ler
 683       P:0001E3 P:0001E3 0A8908            BCLR    #8,X:HDR
 684       P:0001E4 P:0001E4 0614A0            REP     #20
 685       P:0001E5 P:0001E5 000000            NOP
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.asm  Page 14
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.asm  Page 14
 
 
 
@@ -922,8 +922,8 @@ rs
 727       P:000215 P:000215 0C1E90            LSL     #8,A
 728       P:000216 P:000216 000000            NOP
 729                                 L_XMIT
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.asm  Page 15
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.asm  Page 15
 
 
 
@@ -988,8 +988,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.as
 794       X:00000F X:00000F         LATCH     DC      $7A                               ; Starting value in latch chip U25
 795                                  EXPOSURE_TIME
 796       X:000010 X:000010                   DC      0                                 ; Exposure time in milliseconds
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.asm  Page 16
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.asm  Page 16
 
 
 
@@ -1054,8 +1054,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC22_boot.as
 856                                           DEFINE  VIDBRD1   'ARC47_dacs_brd1.asm'   ; video board 1
 857                                           DEFINE  VIDBRD2   'ARC47_dacs_brd2.asm'   ; video board 2
 858                                           DEFINE  VIDBRD3   'ARC47_dacs_brd3.asm'   ; video board 3
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\SystemConfig.asm  Page 17
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\SystemConfig.asm  Page 17
 
 
 
@@ -1120,8 +1120,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\SystemConfig.
 916    
 917       P:000247 P:000247 2E1200            MOVE              #<NPOVERSCAN,A          ; test parallel overscan
 918       P:000248 P:000248 200003            TST     A
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 18
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 18
 
 
 
@@ -1186,8 +1186,8 @@ rial register
 973       P:000277 P:000277 000000            NOP
 974       P:000278 P:000278 000000            NOP
 975       P:000279 P:000279 000000            NOP
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 19
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 19
 
 
 
@@ -1252,8 +1252,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Pag
 1031      P:0002A1 P:0002A1 0EF2AB            JLE     <RSKIP0
 1032      P:0002A2 P:0002A2 06CE00            DO      A,RSKIP0
                             0002AA
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 20
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 20
 
 
 
@@ -1318,8 +1318,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Pag
 1087      P:0002CF P:0002CF 000000            NOP
 1088                                SDATA0
 1089      P:0002D0 P:0002D0 00000C            RTS
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 21
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 21
 
 
 
@@ -1384,8 +1384,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Pag
 1142                                ; *******************************************************************
 1143                                FOR_PSHIFT
 1144      P:0002FB P:0002FB 301300            MOVE              #<NPXSHIFT,R0           ; forward shift rows
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 22
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 22
 
 
 
@@ -1450,8 +1450,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Pag
 1201                                ; PCI_READ_IMAGE
 1202                                ; WAIT_TO_FINISH_CLOCKING
 1203                                ; CLOCK
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 23
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 23
 
 
 
@@ -1516,8 +1516,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Pag
 1256      P:00032A P:00032A 601F00            MOVE              R0,X:<IDL_ADR
 1257      P:00032B P:00032B 44F400            MOVE              #$1064,X0
                             001064
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_power.asm  Page 24
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC47_power.asm  Page 24
 
 
 
@@ -1582,8 +1582,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_power.a
 1309      P:000355 P:000355 20001B            CLR     B
 1310      P:000356 P:000356 241000            MOVE              #$100000,X0             ; Increment over board numbers for DAC write
 s
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_power.asm  Page 25
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC47_power.asm  Page 25
 
 
 
@@ -1648,8 +1648,8 @@ es
 1362      P:000379 P:000379 0A8989            JCLR    #EF,X:HDR,EXP1                    ; Simple test for fast execution
                             00037D
 1363      P:00037B P:00037B 0D00A3            JSR     <GET_RCV                          ; Check for an incoming command
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 26
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 26
 
 
 
@@ -1714,8 +1714,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Pag
 1412                                ; Read the time remaining until the exposure ends
 1413                                READ_EXPOSURE_TIME
 1414      P:0003A7 P:0003A7 47F000            MOVE              X:TCR0,Y1               ; Read elapsed exposure time
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 27
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 27
 
 
 
@@ -1780,8 +1780,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Pag
 1464      P:0003CE P:0003CE 014180            ADD     #1,A                              ; Pixel data = Pixel data + 1
 1465      P:0003CF P:0003CF 000000            NOP
 1466      P:0003D0 P:0003D0 21CF00            MOVE              A,B
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 28
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 28
 
 
 
@@ -1846,8 +1846,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Pag
                             524441
 1522      P:0003FF P:0003FF 0D00E9            JSR     <XMT_WRD
 1523                                ;       MOVE    Y:NSR,B                 ; Number of columns to read
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 29
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 29
 
 
 
@@ -1912,8 +1912,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Pag
 1575      P:00041B P:00041B 0C008E            JMP     <FINISH1
 1576   
 1577                                ; *******************************************************************
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 30
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 30
 
 
 
@@ -1978,8 +1978,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Pag
 1634      P:00043B P:00043B 46F400            MOVE              #'VID',Y0
                             564944
 1635      P:00043D P:00043D 200055            CMP     Y0,A
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_ARC32_sbn.asm  Page 31
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC47_ARC32_sbn.asm  Page 31
 
 
 
@@ -2044,8 +2044,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_ARC32_s
 1692      P:000461 P:000461 01458D  CLK_5     CMP     #5,B
 1693      P:000462 P:000462 0E2465            JNE     <CLK_6
 1694      P:000463 P:000463 0ACE6E            BSET    #14,A
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_ARC32_sbn.asm  Page 32
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC47_ARC32_sbn.asm  Page 32
 
 
 
@@ -2110,8 +2110,8 @@ f
 1748      P:000497 P:000497 56F400            MOVE              #$0E0001,A              ; Magic number for channel #4, Vod1
                             0E0001
 1749      P:000499 P:000499 200042            OR      X0,A
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_ARC32_sbn.asm  Page 33
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC47_ARC32_sbn.asm  Page 33
 
 
 
@@ -2176,8 +2176,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_ARC32_s
 1799      P:0004D2 P:0004D2 0E24D7            JNE     <CMP15V
 1800      P:0004D3 P:0004D3 56F400            MOVE              #$0E000B,A              ; Magic number for channel #14, Vog3
                             0E000B
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_ARC32_sbn.asm  Page 34
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC47_ARC32_sbn.asm  Page 34
 
 
 
@@ -2242,8 +2242,8 @@ r
 1852      P:000505 P:000505 0C0517            JMP     <SVO_XMT
 1853      P:000506 P:000506 014185  CMP1      CMP     #1,A
 1854      P:000507 P:000507 0E250C            JNE     <CMP2
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_ARC32_sbn.asm  Page 35
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC47_ARC32_sbn.asm  Page 35
 
 
 
@@ -2308,8 +2308,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_ARC32_s
                             00057B
 1907      P:00053A P:00053A 44F400            MOVE              #>24,X0                 ; Check for argument less than 32
                             000018
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_ARC32_sbn.asm  Page 36
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC47_ARC32_sbn.asm  Page 36
 
 
 
@@ -2374,8 +2374,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_ARC32_s
 1956      P:000574 P:000574 0ACD6B            BSET    #11,B1
 1957      P:000575 P:000575 200078  SMX_B     ADD     Y1,B                              ; Add prefix to MUX numbers
 1958      P:000576 P:000576 000000            NOP
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_ARC32_sbn.asm  Page 37
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC47_ARC32_sbn.asm  Page 37
 
 
 
@@ -2440,8 +2440,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_ARC32_s
 2018      000064                              EQU     @LCV(L)
 2019   
 2020                                          IF      @SCP("HOST","HOST")
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 38
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 38
 
 
 
@@ -2506,7 +2506,7 @@ ddress (ARC32)
 2075                                ; Speed $c0 to $F0 time constant (first nib)
 2076      0000C0                    VSPEED    EQU     $c0                               ; $c0
 2077   
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  90Prime.asm  Page 39
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  90Prime.asm  Page 39
 
 
 
@@ -2555,7 +2555,7 @@ Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  90Prime.asm  Pa
 2120                                ; *** bias voltages ***
 2121      2.400000E+001             VOD       EQU     24.0                              ; Output Drain 24.0
 2122      1.450000E+001             VRD       EQU     14.5                              ; Reset Drain  trails when > 15   14.5
-2123      -2.000000E+000            VOG       EQU     -2.0                              ; Output Gate (was 0)
+2123      -2.000000E+000            VOG       EQU     -2.0                              ; Output Gate (was 0) -2
 2124      2.500000E+000             VRSV      EQU     2.5                               ; RTN lower more gain 2.0
 2125      2.000000E+001             VSCP      EQU     20.0                              ; SCP 20
 2126   
@@ -2566,23 +2566,23 @@ Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  90Prime.asm  Pa
 2131      4.000000E+000             S_HI      EQU     +4.0                              ; Serial clocks 4,-6
 2132      -6.000000E+000            S_LO      EQU     -6.0                              ; important for CCD1 fat "cols"
 2133   
-2134      4.000000E+000             SW_HI     EQU     +4.0                              ; Summing Well +-4
-2135      -4.000000E+000            SW_LO     EQU     -4.0
+2134      6.000000E+000             SW_HI     EQU     +6.0                              ; Summing Well +-4
+2135      -6.000000E+000            SW_LO     EQU     -6.0                              ; -4
 2136   
 2137      1.500000E+000             P1HI      EQU     +1.5                              ; 10789  2 but 1.5 better now
-2138      -7.000000E+000            P1LO      EQU     -7.0                              ;       -8
+2138      -7.000000E+000            P1LO      EQU     -7.0                              ;       -7
 2139   
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  90Prime.asm  Page 40
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  90Prime.asm  Page 40
 
 
 
-2140      1.500000E+000             P2HI      EQU     +1.5                              ; 10747  2
-2141      -7.000000E+000            P2LO      EQU     -7.0                              ;       -8
+2140      1.500000E+000             P2HI      EQU     +1.5                              ; 10747  1.5
+2141      -7.000000E+000            P2LO      EQU     -7.0                              ;       -7
 2142   
-2143      1.000000E+000             P3HI      EQU     +1.0                              ; 10317  1
+2143      000001                    P3HI      EQU     +1                                ; 10317  1
 2144      -6.500000E+000            P3LO      EQU     -6.5                              ;       -7 reduce for edge glow -6.5
 2145   
-2146      1.000000E+000             P4HI      EQU     +1.0                              ; 10764  2
+2146      1.000000E+000             P4HI      EQU     +1.0                              ; 10764  1
 2147      -8.000000E+000            P4LO      EQU     -8.0                              ;       -8
 2148   
 2149                                ; *** aliases ***
@@ -2638,7 +2638,7 @@ Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  90Prime.asm  Pa
 2199      1.450000E+001             VRD4      EQU     VRD
 2200      1.450000E+001             VRD5      EQU     VRD
 2201      1.450000E+001             VRD6      EQU     VRD
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  90Prime.asm  Page 41
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  90Prime.asm  Page 41
 
 
 
@@ -2683,10 +2683,10 @@ Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  90Prime.asm  Pa
 2240      8.000000E+000             RG4_HI    EQU     RG_HI
 2241      -2.000000E+000            RG4_LO    EQU     RG_LO
 2242   
-2243      4.000000E+000             SWL_HI    EQU     SW_HI
-2244      -4.000000E+000            SWL_LO    EQU     SW_LO
-2245      4.000000E+000             SWR_HI    EQU     SW_HI
-2246      -4.000000E+000            SWR_LO    EQU     SW_LO
+2243      6.000000E+000             SWL_HI    EQU     SW_HI
+2244      -6.000000E+000            SWL_LO    EQU     SW_LO
+2245      6.000000E+000             SWR_HI    EQU     SW_HI
+2246      -6.000000E+000            SWR_LO    EQU     SW_LO
 2247   
 2248      4.000000E+000             S1_HI     EQU     S_HI
 2249      -6.000000E+000            S1_LO     EQU     S_LO
@@ -2704,7 +2704,7 @@ Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  90Prime.asm  Pa
 2261   
 2262      1.500000E+000             P12_HI    EQU     P2HI
 2263      -7.000000E+000            P12_LO    EQU     P2LO
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  90Prime.asm  Page 42
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  90Prime.asm  Page 42
 
 
 
@@ -2713,11 +2713,11 @@ Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  90Prime.asm  Pa
 2266      1.500000E+000             P32_HI    EQU     P2HI
 2267      -7.000000E+000            P32_LO    EQU     P2LO
 2268   
-2269      1.000000E+000             P13_HI    EQU     P3HI
+2269      000001                    P13_HI    EQU     P3HI
 2270      -6.500000E+000            P13_LO    EQU     P3LO
-2271      1.000000E+000             P23_HI    EQU     P3HI
+2271      000001                    P23_HI    EQU     P3HI
 2272      -6.500000E+000            P23_LO    EQU     P3LO
-2273      1.000000E+000             P33_HI    EQU     P3HI
+2273      000001                    P33_HI    EQU     P3HI
 2274      -6.500000E+000            P33_LO    EQU     P3LO
 2275   
 2276      1.000000E+000             P14_HI    EQU     P4HI
@@ -2770,8 +2770,8 @@ erscan
 ta
 2319      Y:000015 Y:000015         FRAMET    DC      0                                 ; number of storage rows for frame transfer 
 shift
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 43
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\TIM3.asm  Page 43
 
 
 
@@ -2836,8 +2836,8 @@ image readout
 2376      000000                    P24L      EQU     0                                 ;       CLK10   Pin 11
 2377      000400                    P24H      EQU     $400                              ;       CLK10
 2378      000000                    P34L      EQU     0                                 ;       CLK11   Pin 12
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\90PrimeClockPins.asm  Page 44
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\90PrimeClockPins.asm  Page 44
 
 
 
@@ -2902,8 +2902,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\90PrimeClockP
 2439                                          ENDIF
 2440                                          IF      @SCP("16","16")
 2441      00F3C0                    SXMIT     EQU     $00F3C0
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_defs.asm  Page 45
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC47_defs.asm  Page 45
 
 
 
@@ -2968,8 +2968,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_defs.as
 2508      002EA1                    DAC_VRD4  EQU     @CVI((VRD4/VRD_MAX)*16384-1)      ; Unipolar
 2509      001FFF                    DAC_VOG4  EQU     @CVI(((VOG4+VOG_MAX)/VOG_MAX)*8192-1) ; Bipolar
 2510      002931                    DAC_VRSV4 EQU     @CVI(((VRSV4+VRSV_MAX)/VRSV_MAX)*8192-1) ; Bipolar
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_defs.asm  Page 46
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC47_defs.asm  Page 46
 
 
 
@@ -3034,8 +3034,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_defs.as
 2569      001E28                    DAC_VOG16 EQU     @CVI(((VOG16+VOG_MAX)/VOG_MAX)*8192-1) ; Bipolar
 2570      002931                    DAC_VRSV16 EQU    @CVI(((VRSV16+VRSV_MAX)/VRSV_MAX)*8192-1) ; Bipolar
 2571   
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_defs.asm  Page 47
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC47_defs.asm  Page 47
 
 
 
@@ -3100,8 +3100,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_defs.as
 2630      Y:000055 Y:000055                   DC      VID0+DAC_ADDR+$000010             ; Vod4,pin 33
 2631      Y:000056 Y:000056                   DC      VID0+DAC_RegD+DAC_VSCP1
 2632      Y:000057 Y:000057                   DC      VID0+DAC_ADDR+$000011             ; Vrd4,pin 56
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_dacs_brd0.asm  Page 48
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC47_dacs_brd0.asm  Page 48
 
 
 
@@ -3166,8 +3166,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_dacs_br
 2691      Y:000080 Y:000080                   DC      VID1+DAC_ADDR+$000003             ; Vod3,pin 53
 2692      Y:000081 Y:000081                   DC      VID1+DAC_RegD+DAC_VOD8
 2693      Y:000082 Y:000082                   DC      VID1+DAC_ADDR+$000007             ; Vrd3,pin 14
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_dacs_brd1.asm  Page 49
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC47_dacs_brd1.asm  Page 49
 
 
 
@@ -3232,8 +3232,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_dacs_br
 2752      Y:0000AB Y:0000AB                   DC      VID2+DAC_ADDR+$000002             ; Vod2,pin 11
 2753      Y:0000AC Y:0000AC                   DC      VID2+DAC_RegD+DAC_VOD11
 2754      Y:0000AD Y:0000AD                   DC      VID2+DAC_ADDR+$000006             ; Vrd2,pin 35
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_dacs_brd2.asm  Page 50
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC47_dacs_brd2.asm  Page 50
 
 
 
@@ -3298,8 +3298,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_dacs_br
 2813      Y:0000D6 Y:0000D6                   DC      VID3+DAC_ADDR+$000001             ; Vod1,pin 32
 2814      Y:0000D7 Y:0000D7                   DC      VID3+DAC_RegD+DAC_VOD14
 2815      Y:0000D8 Y:0000D8                   DC      VID3+DAC_ADDR+$000005             ; Vrd1,pin 55
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_dacs_brd3.asm  Page 51
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC47_dacs_brd3.asm  Page 51
 
 
 
@@ -3364,8 +3364,8 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC47_dacs_br
 2874      Y:000100 Y:000100                   DC      CLKV2+$000200+@CVI((P11_LO+VMAX)/(2*VMAX)*255)
 2875      Y:000101 Y:000101                   DC      CLKV2+$000400+@CVI((P21_HI+VMAX)/(2*VMAX)*255)
 2876      Y:000102 Y:000102                   DC      CLKV2+$000800+@CVI((P21_LO+VMAX)/(2*VMAX)*255)
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  
-C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC32_dacs.asm  Page 52
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  
+C:\azcam\azcam-bok\azcam_bok\primefocus\dspcode\dsptiming_90prime\arc22timing\ARC32_dacs.asm  Page 52
 
 
 
@@ -3430,7 +3430,7 @@ C:\azcam\systems\bok\90prime\dspcode\dsptiming_90prime\arc22timing\ARC32_dacs.as
 2935                                ; STA2900A 90Prime clocking routines
 2936                                ; 23Sep15 MPL after ARC suggestion for delay
 2937   
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  clocking.asm  Page 53
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  clocking.asm  Page 53
 
 
 
@@ -3496,7 +3496,7 @@ Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  clocking.asm  P
 2997 m                                        DC      VIDEO+$060000+%0011011            ; Stop resetting int 6
 2998 m                                        DC      VIDEO+DWELL+%0001011              ; Integrate noise
 2999 m                                        DC      VIDEO+$000000+%0011011            ; Stop int 0
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  clocking.asm  Page 54
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  clocking.asm  Page 54
 
 
 
@@ -3562,7 +3562,7 @@ Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  clocking.asm  P
 3059      Y:00015E Y:00015E                   DC      CLK3+S_DELAY+RGL+S1H+S2H+S3L+SWLH+SWRH
 3060                                ESXFER1
 3061   
-Motorola DSP56300 Assembler  Version 6.3.4   18-11-29  14:38:33  clocking.asm  Page 55
+Motorola DSP56300 Assembler  Version 6.3.4   20-12-04  21:16:43  clocking.asm  Page 55
 
 
 

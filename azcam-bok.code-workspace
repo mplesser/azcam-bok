@@ -5,6 +5,15 @@
 		},
 		{
 			"path": "..\\azcam-expstatus"
+		},
+		{
+			"path": "..\\azcam-arc"
+		},
+		{
+			"path": "..\\azcam"
+		},
+		{
+			"path": "..\\azcam-focus"
 		}
 	],
 	"settings": {
