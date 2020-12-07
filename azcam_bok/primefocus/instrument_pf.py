@@ -35,7 +35,7 @@ class PrimeFocusInstrument(Instrument):
 
         self.Locked = False  # communications lock for galilserver
 
-        self.use_bokpop = 1
+        self.use_bokpop = 0
 
         self.focus_device = "instrument"
 
@@ -487,6 +487,8 @@ class PrimeFocusInstrument(Instrument):
 
         if self.use_bokpop:
             reply = self.get_bokpop_info()
+        else:
+            reply = []
 
         return reply
 
