@@ -35,7 +35,7 @@ class PrimeFocusInstrument(Instrument):
 
         self.Locked = False  # communications lock for galilserver
 
-        self.use_bokpop = 1
+        self.use_bokpop = 0
 
         self.focus_device = "instrument"
 
@@ -80,9 +80,7 @@ class PrimeFocusInstrument(Instrument):
 
             # read current value of keywords
             for key in self.header.get_all_keywords():
-                azcam.log(
-                    ("Keyword: %s has value: %s" % (key, self.get_keyword(key)[1]))
-                )
+                azcam.log(("Keyword: %s has value: %s" % (key, self.get_keyword(key)[1])))
 
             reply = self.get_filter()
             azcam.log(("Filter is %s" % reply))
@@ -597,9 +595,7 @@ class InstrumentServerInterface(object):
         """
 
         try:
-            self.Socket.send(
-                str.encode(Command + Terminator)
-            )  # send command with terminator
+            self.Socket.send(str.encode(Command + Terminator))  # send command with terminator
             return
         except:
             raise azcam.AzcamError("could not send command to instrument")
