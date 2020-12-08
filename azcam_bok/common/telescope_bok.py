@@ -20,11 +20,7 @@ class BokTCS(Telescope):
         super().__init__(obj_id, obj_name)
 
         # telescope header object
-        # self.header = Header("Telescope")
         self.use_bokpop = 0
-        self.DEBUG = 0
-
-    def initialize(self):
         """
         Initializes the telescope interface.
         """
@@ -179,7 +175,7 @@ class BokTCS(Telescope):
             return
 
         self.define_keywords()
-        reply = self.read_header()
+        self.read_header()
 
         return
 

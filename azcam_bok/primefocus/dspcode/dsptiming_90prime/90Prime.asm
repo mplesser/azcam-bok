@@ -28,8 +28,8 @@ OFFSET	EQU	5000
 
 ; *** bias voltages ***
 VOD          EQU     24.0  ; Output Drain 24.0
-VRD          EQU     14.5  ; Reset Drain  trails when > 15   14.5
-VOG          EQU     -2.0  ; Output Gate (was 0)
+VRD          EQU     14.5 ; Reset Drain  trails when > 15   14.5
+VOG          EQU     -2.0  ; Output Gate (was 0) -2
 VRSV         EQU      2.5  ; RTN lower more gain 2.0
 VSCP         EQU     20.0  ; SCP 20
 
@@ -40,19 +40,19 @@ RG_LO		EQU	-2.0
 S_HI		EQU	+4.0  ; Serial clocks 4,-6	
 S_LO		EQU	-6.0  ; important for CCD1 fat "cols"
   
-SW_HI		EQU	+4.0  ; Summing Well +-4
-SW_LO		EQU	-4.0  
+SW_HI		EQU	+6.0  ; Summing Well +-4, +-6 4dec20
+SW_LO		EQU	-6.0  ; -4
 
 P1HI		EQU	+1.5  ; 10789  2 but 1.5 better now
-P1LO		EQU	-7.0  ;       -8
+P1LO		EQU	-7.0  ;       -7
 
-P2HI		EQU	+1.5  ; 10747  2
-P2LO		EQU	-7.0  ;       -8
+P2HI		EQU	+1.5  ; 10747  1.5
+P2LO		EQU	-7.0  ;       -7
 
-P3HI		EQU	+1.0  ; 10317  1
+P3HI		EQU	+1  ; 10317  1
 P3LO		EQU	-6.5  ;       -7 reduce for edge glow -6.5
 
-P4HI		EQU	+1.0  ; 10764  2
+P4HI		EQU	+1.0  ; 10764  1
 P4LO		EQU	-8.0  ;       -8
 
 ; *** aliases ***
