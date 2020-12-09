@@ -25,7 +25,9 @@ else:
 
 profile = "azcamserver"
 
-import_command = f"import azcam_bok.primefocus.server; from azcam.cli import *"
+import_command = (
+    f"import azcam_bok.primefocus.server; from azcam.cli import *; del azcam.cli"
+)
 
 # execute
 cl = (

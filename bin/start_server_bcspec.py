@@ -22,7 +22,9 @@ configscript = "azcam_bcspec_server"
 
 profile = "azcamserver"
 
-import_command = f"import azcam_bok.bcspec.server; from azcam.cli import *"
+import_command = (
+    f"import azcam_bok.bcspec.server; from azcam.cli import *; del azcam.cli"
+)
 
 # execute
 cl = (

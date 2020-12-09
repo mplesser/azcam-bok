@@ -20,7 +20,11 @@ class BokTCS(Telescope):
         super().__init__(obj_id, obj_name)
 
         # telescope header object
+        #self.header = Header("Telescope")
         self.use_bokpop = 0
+        self.DEBUG = 0
+
+    def initialize(self):
         """
         Initializes the telescope interface.
         """
@@ -96,7 +100,9 @@ class BokTCS(Telescope):
             return
 
         try:
-            command = self.Tserver.make_packet("REQUEST " + self.Tserver.keywords[keyword])
+            command = self.Tserver.make_packet(
+                "REQUEST " + self.Tserver.keywords[keyword]
+            )
         except KeyError:
             raise azcam.AzcamError(f"Keyword {keyword} not defined")
 
@@ -470,7 +476,9 @@ class TelcomServerInterface(object):
         Appends CRLF to command.
         """
 
-        reply = self.Socket.send(str.encode(command + "\r\n"))  # send command with terminator
+        reply = self.Socket.send(
+            str.encode(command + "\r\n")
+        )  # send command with terminator
 
     def recv(self, Length):
         """
@@ -505,7 +513,9 @@ class TelcomServerInterface(object):
         """
 
         ReplyLength = self.ReplyLengths[keyword]
-        reply = telemetry[self.Offsets[keyword] - 1 : self.Offsets[keyword] + ReplyLength]
+        reply = telemetry[
+            self.Offsets[keyword] - 1 : self.Offsets[keyword] + ReplyLength
+        ]
 
         # parse RA and DEC specially
         if keyword == "RA":
