@@ -16,6 +16,9 @@ from azcam_arc.tempcon_arc import TempConArc
 from azcam_bok.bcspec.instrument_bcspec import BCSpecInstrument
 from azcam_bok.common.telescope_bok import BokTCS
 from azcam_ds9.ds9display import Ds9Display
+import azcam_exptool
+import azcam_status
+import azcam_webobs
 
 # ****************************************************************
 # define folders for system
@@ -169,14 +172,10 @@ azcam.utils.curdir(wd)
 # ****************************************************************
 # web server
 # ****************************************************************
-from azcam.webserver.web_server import WebServer
-
 webserver = WebServer()
-
-import azcam_exptool
-import azcam_status
-import azcam_webobs
-
+azcam_exptool.load()
+azcam_status.load()
+azcam_webobs.load()
 webserver.start()
 
 # ****************************************************************

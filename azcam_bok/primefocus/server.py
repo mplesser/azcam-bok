@@ -15,6 +15,10 @@ from azcam_arc.exposure_arc import ExposureArc
 from azcam_bok.common.telescope_bok import BokTCS
 from azcam_cryocon.tempcon_cryoconm24 import TempConCryoCon
 from azcam_ds9.ds9display import Ds9Display
+import azcam_exptool
+import azcam_status
+import azcam_webobs
+from azcam_focus.focus_server import Focus
 
 # ****************************************************************
 # parse command line arguments
@@ -54,28 +58,39 @@ if option == "menu":
 CSS = 0
 if "90primeone" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_one.ini")
-    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90PrimeOne_master.txt")
+    template = os.path.join(
+        azcam.db.datafolder, "templates", "FitsTemplate_90PrimeOne_master.txt"
+    )
     timingfile = os.path.join(
-        azcam.db.systemfolder, "dspcode", "dsptiming_90primeone", "90PrimeOne_config0.lod",
+        azcam.db.systemfolder,
+        "dspcode",
+        "dsptiming_90primeone",
+        "90PrimeOne_config0.lod",
     )
     cmdport = 2432
 elif "normal" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_normal.ini")
-    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt")
+    template = os.path.join(
+        azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt"
+    )
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_90prime", "90Prime_config0.lod"
     )
     cmdport = 2402
 elif "fast" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_fast.ini")
-    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt")
+    template = os.path.join(
+        azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt"
+    )
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_fast", "90Prime_config1.lod"
     )
     cmdport = 2402
 elif "overscan" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_overscan.ini")
-    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt")
+    template = os.path.join(
+        azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt"
+    )
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_90prime", "90Prime_config0.lod"
     )
@@ -84,7 +99,9 @@ elif "css" in option:
     print("90Prime for CSS")
     CSS = 1
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_css.ini")
-    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_css.txt")
+    template = os.path.join(
+        azcam.db.datafolder, "templates", "FitsTemplate_90Prime_css.txt"
+    )
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_90prime", "90Prime_config0.lod"
     )
@@ -122,7 +139,9 @@ controller.set_boards()
 controller.video_gain = 1
 controller.video_speed = 1
 controller.camserver.set_server("localhost", 2405)
-controller.pci_file = os.path.join(azcam.db.systemfolder, "dspcode", "dsppci", "pci3.lod")
+controller.pci_file = os.path.join(
+    azcam.db.systemfolder, "dspcode", "dsppci", "pci3.lod"
+)
 controller.timing_file = timingfile
 
 # ****************************************************************
@@ -161,9 +180,7 @@ exposure.set_remote_server(remote_imageserver_host, remote_imageserver_port)
 # ****************************************************************
 # focus script - server-side
 # ****************************************************************
-from azcam_focus.focus_server import FocusServer
-
-focus = FocusServer()
+focus = Focus()
 azcam.db.cli_cmds["focus"] = focus
 focus.focus_component = "instrument"
 focus.focus_type = "step"
@@ -230,14 +247,10 @@ azcam.utils.curdir(wd)
 # ****************************************************************
 # web server
 # ****************************************************************
-from azcam.webserver.web_server import WebServer
-
 webserver = WebServer()
-
-import azcam_exptool
-import azcam_status
-import azcam_webobs
-
+azcam_exptool.load()
+azcam_status.load()
+azcam_webobs.load()
 webserver.start()
 
 # ****************************************************************
