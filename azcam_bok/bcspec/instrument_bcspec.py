@@ -17,19 +17,18 @@ class BCSpecInstrument(Instrument):
     # Valid lamp names
     Lamps = ["NEON", "CONT", "UV", "HE/AR", "FE/NE", "UNDEF", "MIRROR", "SPARE"]
 
-    def __init__(self, obj_id="instrument", obj_name="bcspec"):
+    def __init__(self, obj_id="instrument", name="bcspec"):
 
-        super().__init__(obj_id, obj_name)
+        super().__init__(obj_id, name)
 
-        self.use_bokpop = 1
+        self.use_bokpop = 0
 
-        self.Name = "BCSpec"
         self.Host = "10.30.1.2"  # IP address for instrument server on bokap3
         self.Port = 9875
         self.ActiveComps = [""]
 
         # opto22 server interface
-        self.Iserver = InstrumentServerInterface(self.Host, self.Port, self.Name)
+        self.Iserver = InstrumentServerInterface(self.Host, self.Port, self.name)
 
         # bokpop
         self.bokpop = BokData("10.30.1.3", 5554, 1.0)  # 1 sec timeout
@@ -295,6 +294,8 @@ class BCSpecInstrument(Instrument):
 
         if self.use_bokpop:
             reply = self.get_bokpop_info()
+        else:
+            reply = []
 
         return reply
 
@@ -323,17 +324,17 @@ class InstrumentServerInterface(object):
     Communicates with an instrument server using an ethernet socket.
     """
 
-    Host = ""  # instrument server host
-    Port = 0  # instrument server port
+    host = ""  # instrument server host
+    port = 0  # instrument server port
     Timeout = 5.0  # socket timeout in seconds
     OK = "OK"
     ERROR = "ERROR"
 
-    def __init__(self, Host, Port, Name=""):
+    def __init__(self, host, port, name=""):
 
-        self.Host = Host
-        self.Port = Port
-        self.Name = Name
+        self.host = host
+        self.port = port
+        self.name = name
 
     def open(self, Host="", Port=-1):
         """
@@ -343,18 +344,18 @@ class InstrumentServerInterface(object):
         """
 
         if Host != "":
-            self.Host = Host
+            self.host = Host
         if Port != -1:
-            self.Port = Port
+            self.port = Port
 
-        self.Socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.Socket.settimeout(float(self.Timeout))
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.socket.settimeout(float(self.Timeout))
         try:
-            reply = self.Socket.connect((self.Host, self.Port))
+            reply = self.socket.connect((self.host, self.port))
             return ["OK"]
         except Exception:
             self.close()
-            return ["ERROR", "%s not opened" % self.Name]
+            return ["ERROR", "%s not opened" % self.name]
 
     def close(self):
         """
@@ -362,7 +363,7 @@ class InstrumentServerInterface(object):
         """
 
         try:
-            self.Socket.close()
+            self.socket.close()
         except Exception:
             pass
 
@@ -390,13 +391,13 @@ class InstrumentServerInterface(object):
         """
 
         try:
-            self.Socket.send(
+            self.socket.send(
                 str.encode(Command + Terminator)
             )  # send command with terminator
             return ["OK"]
         except Exception:
             self.close()
-            return ["ERROR", "could not send command to %s" % self.Name]
+            return ["ERROR", "could not send command to %s" % self.name]
 
     def recv(self, Length=-1, Terminator="\n"):
         """
@@ -408,16 +409,16 @@ class InstrumentServerInterface(object):
 
         if Length == -2:
             try:
-                self.Socket.settimeout(3)
-                msg = self.Socket.recv(1024).decode()
-                self.Socket.settimeout(self.Timeout)
+                self.socket.settimeout(3)
+                msg = self.socket.recv(1024).decode()
+                self.socket.settimeout(self.Timeout)
                 return ["OK", msg]
             except Exception:
                 return ["OK", ""]
 
         # receive Length bytes
         if Length != -1:
-            msg = self.Socket.recv(Length).decode()
+            msg = self.socket.recv(Length).decode()
             return ["OK", msg]
 
         # receive with terminator
@@ -425,17 +426,17 @@ class InstrumentServerInterface(object):
         loop = 0
         while chunk != Terminator:  # CR LF is usually '\n' when translated
             try:
-                chunk = self.Socket.recv(1).decode()
+                chunk = self.socket.recv(1).decode()
             except Exception as errorcode:
                 self.close()
-                return ["ERROR", "%s communication problem" % self.Name]
+                return ["ERROR", "%s communication problem" % self.name]
             if chunk != "":
                 msg = msg + chunk
                 loop = 0
             else:
                 loop += 1
                 if loop > 10:
-                    return ["ERROR", "%s server communication loop timeout" % self.Name]
+                    return ["ERROR", "%s server communication loop timeout" % self.name]
 
         Reply = msg[:-2]  # remove CR/LF
         if Reply is None:

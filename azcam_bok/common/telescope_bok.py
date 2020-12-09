@@ -15,12 +15,12 @@ class BokTCS(Telescope):
     The interface to the Steward Observatory Bok TCS telescope server.
     """
 
-    def __init__(self, obj_id="telescope", obj_name="Bok telescope"):
+    def __init__(self, obj_id="telescope", name="Bok telescope"):
 
-        super().__init__(obj_id, obj_name)
+        super().__init__(obj_id, name)
 
         # telescope header object
-        #self.header = Header("Telescope")
+        # self.header = Header("Telescope")
         self.use_bokpop = 0
         self.DEBUG = 0
 

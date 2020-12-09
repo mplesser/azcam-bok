@@ -22,9 +22,9 @@ class PrimeFocusInstrument(Instrument):
     The InstrumentServer is the galil, later Jeff Fookson's Ruby Galil server.
     """
 
-    def __init__(self, obj_id="instrument", obj_name="primefocus"):
+    def __init__(self, obj_id="instrument", name="primefocus"):
 
-        super().__init__(obj_id, obj_name)
+        super().__init__(obj_id, name)
 
         self.Name = "90prime"
         self.Port = 9874  # port for galil server on bok

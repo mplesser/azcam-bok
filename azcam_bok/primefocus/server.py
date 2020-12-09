@@ -147,7 +147,7 @@ controller.timing_file = timingfile
 # ****************************************************************
 # temperature controller
 # ****************************************************************
-tempcon = TempConCryoCon()
+tempcon = TempConCryoCon(name="90priem tempcon")
 tempcon.control_temperature = -135.0
 # tempcon.host = "10.0.0.45"
 tempcon.host = "10.30.3.32"
