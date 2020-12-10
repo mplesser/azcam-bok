@@ -398,7 +398,7 @@ class PrimeFocusInstrument(Instrument):
         elif self.header.typestrings[Keyword] == "float":
             reply = float(reply)
 
-        t = self.header.get_type_string(self.header.typestrings[Keyword])
+        t = self.header.self.header.typestrings[Keyword]
 
         return [reply, self.header.comments[Keyword], t]
 

@@ -154,7 +154,7 @@ class BokTCS(Telescope):
         h = h[1][l + 1 :]  # strip header stuff
 
         for key in self.header.get_all_keywords():
-            t = self.header.get_type_string(self.Tserver.typestrings[key])
+            t = self.Tserver.typestrings[key]
             list1 = [
                 key,
                 self.Tserver.parse_keyword(key, h)[1],
@@ -364,20 +364,20 @@ class TelcomServerInterface(object):
         "MOTION": "motion flag",
     }
     typestrings = {
-        "RA": str,
-        "DEC": str,
-        "AIRMASS": float,
-        "HA": str,
-        "LST-OBS": str,
-        "EQUINOX": float,
-        "JULIAN": float,
-        "ELEVAT": float,
-        "AZIMUTH": float,
-        "MOTION": int,
-        "BEAM": int,
-        "ROTANGLE": float,
-        "ST": str,
-        "EPOCH": float,
+        "RA": "str",
+        "DEC": "str",
+        "AIRMASS": "float",
+        "HA": "str",
+        "LST-OBS": "str",
+        "EQUINOX": "float",
+        "JULIAN": "float",
+        "ELEVAT": "float",
+        "AZIMUTH": "float",
+        "MOTION": "int",
+        "BEAM": "int",
+        "ROTANGLE": "float",
+        "ST": "str",
+        "EPOCH": "float",
     }
     # ReplyLengths={'RA':9,'DEC':9,'AIRMASS':5,'HA':9,'LST-OBS':8,'EQUINOX':7,
     #      'JULIAN':10,'ELEVAT':5,'AZIMUTH':6,'MOTION':1,'ROTANGLE':5,'ST':8,'EPOCH':7}
@@ -525,9 +525,9 @@ class TelcomServerInterface(object):
 
         # convert type
         try:
-            if self.typestrings[keyword] == int:
+            if self.typestrings[keyword] == "int":
                 reply = int(reply)
-            elif self.typestrings[keyword] == float:
+            elif self.typestrings[keyword] == "float":
                 reply = float(reply)
         except Exception as message:
             azcam.log("ERROR reading telescope data (%s):" % keyword, message)
