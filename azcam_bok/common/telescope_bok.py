@@ -6,7 +6,6 @@ import sys
 import time
 
 import azcam
-from azcam.header import Header
 from azcam.telescope import Telescope
 
 
@@ -19,9 +18,6 @@ class BokTCS(Telescope):
 
         super().__init__(obj_id, name)
 
-        # telescope header object
-        # self.header = Header("Telescope")
-        self.use_bokpop = 0
         self.DEBUG = 0
 
     def initialize(self):
@@ -35,10 +31,6 @@ class BokTCS(Telescope):
         if not self.enabled:
             azcam.AzcamWarning(f"{self.name} is not enabled")
             return
-
-        # do not write telescope header with bokpop as it is in 'instrument'
-        if self.use_bokpop:
-            azcam.db.headerorder.remove("telescope")
 
         # telescope server interface
         self.Tserver = TelcomServerInterface()
@@ -77,14 +69,9 @@ class BokTCS(Telescope):
         Defines telescope keywords to telescope, if they are not already defined.
         """
 
-        if len(self.Tserver.keywords) == 0:
-            return
-
         # add keywords to header
         for key in self.Tserver.keywords:
-            self.header.keywords[key] = self.Tserver.keywords[key]
-            self.header.comments[key] = self.Tserver.comments[key]
-            self.header.typestrings[key] = self.Tserver.typestrings[key]
+            self.set_keyword(key, self.Tserver.comments[key], self.Tserver.typestrings[key])
 
         return
 
@@ -100,20 +87,16 @@ class BokTCS(Telescope):
             return
 
         try:
-            command = self.Tserver.make_packet(
-                "REQUEST " + self.Tserver.keywords[keyword]
-            )
+            command = self.Tserver.make_packet("REQUEST " + self.Tserver.keywords[keyword])
         except KeyError:
             raise azcam.AzcamError(f"Keyword {keyword} not defined")
 
         ReplyLength = self.Tserver.ReplyLengths[keyword]
         reply = self.Tserver.command(command, ReplyLength + self.Tserver.Offset)
         if reply[0] != "OK":
-            self.header.set_keyword(keyword, "")
+            self.set_keyword(keyword, "")
             return reply
         reply = self.Tserver.parse_reply(reply[1], ReplyLength)
-        # reply=reply.lstrip()
-        # reply=reply.rstrip()
 
         # parse RA and DEC specially
         if keyword == "RA":
@@ -124,7 +107,7 @@ class BokTCS(Telescope):
             pass
 
         # store value in Header
-        self.header.set_keyword(keyword, reply)
+        self.set_keyword(keyword, reply)
 
         reply, t = self.header.convert_type(reply, self.header.typestrings[keyword])
 
@@ -139,21 +122,21 @@ class BokTCS(Telescope):
         """
 
         if not self.enabled:
-            azcam.AzcamWarning("telescope not enabled")
+            azcam.AzcamWarning(f"{self.name} is not enabled")
             return
 
         header = []
 
         cmd = self.Tserver.make_packet("REQUEST ALL")
-        l = (
+        l1 = (
             len(self.Tserver.TELID) + len(self.Tserver.SYSID) + len(self.Tserver.PID)
         )  # get one telemetry string
-        h = self.Tserver.command(cmd, 151 + l)
+        h = self.Tserver.command(cmd, 151 + l1)
         if h[0] != "OK":
             return h
-        h = h[1][l + 1 :]  # strip header stuff
+        h = h[1][l1 + 1 :]  # strip header stuff
 
-        for key in self.header.get_all_keywords():
+        for key in self.get_all_keywords():
             t = self.Tserver.typestrings[key]
             list1 = [
                 key,
@@ -163,27 +146,9 @@ class BokTCS(Telescope):
             ]
             header.append(list1)
             # store value in Header
-            self.header.set_keyword(list1[0], list1[1], list1[2], list1[3])
+            self.set_keyword(list1[0], list1[1], list1[2], list1[3])
 
         return header
-
-    def update_header(self):
-        """
-        Update headers, reading current data.
-        """
-
-        # delete all keywords if not enabled
-        if not self.enabled:
-            self.header.delete_all_keywords()
-            return
-
-        if self.use_bokpop:
-            return
-
-        self.define_keywords()
-        self.read_header()
-
-        return
 
     # **************************************************************************************************
     # Move
@@ -299,7 +264,7 @@ class BokTCS(Telescope):
             reply = self.get_keyword("MOTION")
             try:
                 motion = int(reply[0])
-            except:
+            except Exception:
                 raise azcam.AzcamError("bad MOTION status keyword: %s" % reply)
 
             if not motion:
@@ -357,7 +322,6 @@ class TelcomServerInterface(object):
         "JULIAN": "julian date",
         "ELEVAT": "elevation",
         "AZIMUTH": "azimuth",
-        "MOTION": "telescope motion flag",
         "ROTANGLE": "IIS rotation angle",
         "ST": "local siderial time",
         "EPOCH": "equinox of RA and DEC",
@@ -454,7 +418,7 @@ class TelcomServerInterface(object):
         """
         try:
             self.Socket.close()
-        except:
+        except Exception:
             pass
 
     def command(self, command, ReplyLength):
@@ -476,9 +440,7 @@ class TelcomServerInterface(object):
         Appends CRLF to command.
         """
 
-        reply = self.Socket.send(
-            str.encode(command + "\r\n")
-        )  # send command with terminator
+        reply = self.Socket.send(str.encode(command + "\r\n"))  # send command with terminator
 
     def recv(self, Length):
         """
@@ -513,9 +475,7 @@ class TelcomServerInterface(object):
         """
 
         ReplyLength = self.ReplyLengths[keyword]
-        reply = telemetry[
-            self.Offsets[keyword] - 1 : self.Offsets[keyword] + ReplyLength
-        ]
+        reply = telemetry[self.Offsets[keyword] - 1 : self.Offsets[keyword] + ReplyLength]
 
         # parse RA and DEC specially
         if keyword == "RA":
@@ -544,18 +504,18 @@ class TelcomServerInterface(object):
             replist = reply.split(" ")
             reply = self.parse_remove_null(replist)
             return reply[3]
-        except:
+        except Exception:
             raise azcam.AzcamError("telescope parse error")
 
     def parse_remove_null(self, List):
         """
-        Internal Use Only.<br>
+        Internal Use Only.
         """
 
         while 1:
             try:
                 List.remove("")
-            except:
+            except Exception:
                 break
 
         return List

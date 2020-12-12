@@ -35,8 +35,6 @@ class PrimeFocusInstrument(Instrument):
 
         self.Locked = False  # communications lock for galilserver
 
-        self.use_bokpop = 0
-
         self.focus_device = "instrument"
 
         # instrument server interface
@@ -79,10 +77,8 @@ class PrimeFocusInstrument(Instrument):
             self.initialize()
 
             # read current value of keywords
-            for key in self.header.get_all_keywords():
-                azcam.log(
-                    ("Keyword: %s has value: %s" % (key, self.get_keyword(key)[1]))
-                )
+            for key in self.get_all_keywords():
+                azcam.log(("Keyword: %s has value: %s" % (key, self.get_keyword(key)[1])))
 
             reply = self.get_filter()
             azcam.log(("Filter is %s" % reply))
@@ -354,82 +350,50 @@ class PrimeFocusInstrument(Instrument):
         Defines instrument keywords, if they are not already defined.
         """
 
-        if len(self.header.keywords) != 0:
-            return
-
         # add keywords to header
         keywords = ["FILTER", "FOCUSVAL"]
         comments = {"FILTER": "Filter name", "FOCUSVAL": "Focus"}
-        types = {"FILTER": str, "FOCUSVAL": str}
+        typestrings = {"FILTER": "str", "FOCUSVAL": "str"}
 
         for key in keywords:
-            self.header.set_keyword(key, "", comments[key], types[key])
+            self.set_keyword(key, "", comments[key], typestrings[key])
 
         return
 
-    def get_keyword(self, Keyword):
+    def get_keyword(self, keyword):
         """
         Read an instrument keyword value.
         This command will read hardware to obtain the keyword value.
         """
 
-        if Keyword == "FOCUSVAL":
+        if keyword == "FOCUSVAL":
             reply = self.get_focus_all()
-        elif Keyword == "FILTER":
+        elif keyword == "FILTER":
             reply = self.get_filter(1)
-        elif Keyword == "FOCUS0":
+        elif keyword == "FOCUS0":
             reply = self.get_focus(0)
-        elif Keyword == "FOCUS1":
+        elif keyword == "FOCUS1":
             reply = self.get_focus(1)
-        elif Keyword == "FOCUS2":
+        elif keyword == "FOCUS2":
             reply = self.get_focus(2)
         else:
             try:
-                reply = self.header.Values[Keyword]
+                reply = self.header.values[keyword]
             except Exception:
-                raise azcam.AzcamError(f"keyword not defined: {Keyword}")
+                raise azcam.AzcamError(f"keyword not defined: {keyword}")
 
         # store value in Header
-        self.header.set_keyword(Keyword, reply)
+        self.set_keyword(keyword, reply)
 
         # convert type
-        if self.header.typestrings[Keyword] == "int":
+        if self.header.typestrings[keyword] == "int":
             reply = int(reply)
-        elif self.header.typestrings[Keyword] == "float":
+        elif self.header.typestrings[keyword] == "float":
             reply = float(reply)
 
-        t = self.header.self.header.typestrings[Keyword]
+        t = self.header.self.header.typestrings[keyword]
 
-        return [reply, self.header.comments[Keyword], t]
-
-    def read_header(self):
-        """
-        Reads, records, and returns the current header.
-        This method looks up all keywords and queries hardware for the current value of each keyword.
-        Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
-        Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.
-        Type is one of 'str', 'int', 'float', or 'complex'.
-        """
-
-        if not self.enabled:
-            azcam.AzcamWarning("instrument not enabled")
-            return
-
-        header = []
-        reply = self.header.get_all_keywords()
-
-        for key in reply:
-            try:
-                reply = self.get_keyword(key)
-            except Exception:
-                continue
-            list1 = [key, reply[0], reply[1], reply[2]]
-            header.append(list1)
-
-        # get infrastructure header info
-        reply = self.get_info()
-
-        return header
+        return [reply, self.header.comments[keyword], t]
 
     # *** GUIDER ***
 
@@ -476,36 +440,6 @@ class PrimeFocusInstrument(Instrument):
         CurrentFilterName = reply
 
         return CurrentFilterName
-
-    # *** INFRASTRUCTURE ***
-
-    def get_info(self):
-        """
-        Get infrastructure info from servers running on bokpct.
-        These are temperatures, humidity, dewpoints, and weather.
-        """
-
-        if self.use_bokpop:
-            reply = self.get_bokpop_info()
-        else:
-            reply = []
-
-        return reply
-
-    def get_bokpop_info(self):
-        """
-        Get info from bokpop server.
-        """
-
-        bokpopdata = self.bokpop.makeHeader()
-
-        for item in bokpopdata:
-            keyword = item[0]
-            value = item[1]
-            comment = item[2]
-            self.header.set_keyword(keyword, value, comment, str)
-
-        return bokpopdata
 
     # *** raw command to Galil, usually for testing only ***
 
@@ -603,9 +537,7 @@ class InstrumentServerInterface(object):
         """
 
         try:
-            self.Socket.send(
-                str.encode(Command + Terminator)
-            )  # send command with terminator
+            self.Socket.send(str.encode(Command + Terminator))  # send command with terminator
             return
         except:
             raise azcam.AzcamError("could not send command to instrument")

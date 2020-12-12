@@ -21,8 +21,6 @@ class BCSpecInstrument(Instrument):
 
         super().__init__(obj_id, name)
 
-        self.use_bokpop = 0
-
         self.Host = "10.30.1.2"  # IP address for instrument server on bokap3
         self.Port = 9875
         self.ActiveComps = [""]
@@ -240,83 +238,6 @@ class BCSpecInstrument(Instrument):
 
         return
 
-    def get_keyword(self, keyword):
-        """
-        Read an instrument keyword value.
-        This command will read hardware to obtain the keyword value.
-        """
-
-        try:
-            reply = self.header.values[keyword]
-        except Exception:
-            raise azcam.AzcamError(f"Keyword {keyword} not defined")
-
-        # store value in Header
-        self.header.set_keyword(keyword, reply)
-
-        reply, t = self.header.convert_type(reply, self.header.typestrings[keyword])
-
-        return [reply, self.header.comments[keyword], t]
-
-    def read_header(self):
-        """
-        Reads, records, and returns the current header.
-        This method looks up all keywords and queries hardware for the current value of each keyword.
-        Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
-        Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.
-        Type is one of 'str', 'int', 'float', or 'complex'.
-        """
-
-        if not self.enabled:
-            azcam.AzcamWarning("instrument not enabled")
-            return
-
-        header = []
-        reply = self.header.get_all_keywords()
-
-        for key in reply:
-            reply = self.get_keyword(key)
-            list1 = [key, reply[0], reply[1], reply[2]]
-            header.append(list1)
-
-        # get infrastructure header info
-        reply = self.get_info()
-
-        return header
-
-    # *** INFRASTRUCTURE ***
-
-    def get_info(self):
-        """
-        Get infrastructure info from servers running on bokpct.
-        These are temperatures, humidity, dewpoints, and weather.
-        """
-
-        if self.use_bokpop:
-            reply = self.get_bokpop_info()
-        else:
-            reply = []
-
-        return reply
-
-    def get_bokpop_info(self):
-        """
-        Get info from bokpop server.
-        """
-
-        bokpopdata = self.bokpop.makeHeader()
-
-        for item in bokpopdata:
-            keyword = item[0]
-            value = item[1]
-            comment = item[2]
-            self.header.set_keyword(keyword, value, comment, str)
-
-        return bokpopdata
-
-
-# *** instrument server interface ***
-
 
 class InstrumentServerInterface(object):
     """
@@ -391,9 +312,7 @@ class InstrumentServerInterface(object):
         """
 
         try:
-            self.socket.send(
-                str.encode(Command + Terminator)
-            )  # send command with terminator
+            self.socket.send(str.encode(Command + Terminator))  # send command with terminator
             return ["OK"]
         except Exception:
             self.close()
