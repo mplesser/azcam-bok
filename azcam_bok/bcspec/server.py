@@ -83,11 +83,22 @@ exposure.image.filetype = azcam.db.filetypes["FITS"]
 exposure.display_image = 0
 exposure.folder = azcam.db.datafolder
 exposure.folder = "/home/bokobs"
-exposure.image.remote_imageserver_filename = "azcamimage.fits"
 remote_imageserver_host = "10.30.1.2"  # bart
 remote_imageserver_port = 6543
-exposure.set_remote_server(remote_imageserver_host, remote_imageserver_port)
-# exposure.set_remote_server()
+exposure.set_remote_imageserver(remote_imageserver_host, remote_imageserver_port, "azcamimage.fits")
+# exposure.set_remote_imageserver()
+ref1 = 1.0
+ref2 = 1.0
+exposure.image.header.set_keyword("CRPIX1", ref1, "Coordinate reference pixel")
+exposure.image.header.set_keyword("CRPIX2", ref2, "Coordinate reference pixel")
+CD1_1 = 1.0
+CD1_2 = 0.0
+CD2_1 = 0.0
+CD2_2 = 1.0
+exposure.image.header.set_keyword("CD1_1", CD1_1, "Coordinate matrix")
+exposure.image.header.set_keyword("CD1_2", CD1_2, "Coordinate matrix")
+exposure.image.header.set_keyword("CD2_1", CD2_1, "Coordinate matrix")
+exposure.image.header.set_keyword("CD2_2", CD2_2, "Coordinate matrix")
 
 # detector
 detector_bcspec = {
@@ -102,35 +113,6 @@ detector_bcspec = {
     "ctype": ["LINEAR", "LINEAR"],
 }
 exposure.set_detpars(detector_bcspec)
-
-# ****************************************************************
-# custom keyword change
-# ****************************************************************
-def finish(self):
-    """
-    Allow custom operations at end of exposure.
-    Set custom header values.
-    """
-
-    # self is exposure instance
-    ref1 = 1.0
-    ref2 = 1.0
-    self.image.header.set_keyword("CRPIX1", ref1, "Coordinate reference pixel")
-    self.image.header.set_keyword("CRPIX2", ref2, "Coordinate reference pixel")
-
-    CD1_1 = 1.0
-    CD1_2 = 0.0
-    CD2_1 = 0.0
-    CD2_2 = 1.0
-    self.image.header.set_keyword("CD1_1", CD1_1, "Coordinate matrix")
-    self.image.header.set_keyword("CD1_2", CD1_2, "Coordinate matrix")
-    self.image.header.set_keyword("CD2_1", CD2_1, "Coordinate matrix")
-    self.image.header.set_keyword("CD2_2", CD2_2, "Coordinate matrix")
-
-    return
-
-
-exposure.finish = types.MethodType(finish, exposure)
 
 # ****************************************************************
 # instrument

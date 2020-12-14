@@ -158,12 +158,11 @@ exposure.filetype = azcam.db.filetypes["MEF"]
 exposure.image.filetype = azcam.db.filetypes["MEF"]
 exposure.update_headers_in_background = 1
 exposure.display_image = 0
-exposure.remote_imageserver_filename = "azcamimage.fits"
 exposure.image.server_type = "dataserver"
 remote_imageserver_host = "10.30.1.2"
 remote_imageserver_port = 6543
-exposure.set_remote_server(remote_imageserver_host, remote_imageserver_port)
-# exposure.set_remote_server()
+exposure.set_remote_imageserver(remote_imageserver_host, remote_imageserver_port, "azcamimage.fits")
+# exposure.set_remote_imageserver()
 
 # ****************************************************************
 # focus script - server-side
@@ -220,7 +219,7 @@ if CSS:
     css = CSS()
     azcam.db.cli_cmds["css"] = css
     exposure.image.server_type = "azcam"
-    exposure.set_remote_server("10.30.6.2", 6543)
+    exposure.set_remote_imageserver("10.30.6.2", 6543)
     exposure.folder = "/home/css"
 
 # ****************************************************************
