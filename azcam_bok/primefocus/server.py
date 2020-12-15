@@ -9,7 +9,7 @@ import azcam.shortcuts
 from azcam.cmdserver import CommandServer
 from azcam.genpars import GenPars
 from azcam.system import System
-from azcam.webserver.web_server import WebServer
+from azcam_webserver.web_server import WebServer
 from azcam_arc.controller_arc import ControllerArc
 from azcam_arc.exposure_arc import ExposureArc
 from azcam_bok.common.telescope_bok import BokTCS
