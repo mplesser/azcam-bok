@@ -4,7 +4,8 @@ import datetime
 import os
 import sys
 
-from azcam.server import azcam
+import azcam
+import azcam.server
 import azcam.shortcuts
 from azcam.cmdserver import CommandServer
 from azcam.genpars import GenPars
@@ -58,7 +59,9 @@ if option == "menu":
 CSS = 0
 if "90primeone" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_one.ini")
-    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90PrimeOne_master.txt")
+    template = os.path.join(
+        azcam.db.datafolder, "templates", "FitsTemplate_90PrimeOne_master.txt"
+    )
     timingfile = os.path.join(
         azcam.db.systemfolder,
         "dspcode",
@@ -68,21 +71,27 @@ if "90primeone" in option:
     cmdport = 2432
 elif "normal" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_normal.ini")
-    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt")
+    template = os.path.join(
+        azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt"
+    )
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_90prime", "90Prime_config0.lod"
     )
     cmdport = 2402
 elif "fast" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_fast.ini")
-    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt")
+    template = os.path.join(
+        azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt"
+    )
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_fast", "90Prime_config1.lod"
     )
     cmdport = 2402
 elif "overscan" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_overscan.ini")
-    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt")
+    template = os.path.join(
+        azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt"
+    )
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_90prime", "90Prime_config0.lod"
     )
@@ -91,7 +100,9 @@ elif "css" in option:
     print("90Prime for CSS")
     CSS = 1
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_css.ini")
-    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_css.txt")
+    template = os.path.join(
+        azcam.db.datafolder, "templates", "FitsTemplate_90Prime_css.txt"
+    )
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_90prime", "90Prime_config0.lod"
     )
@@ -129,7 +140,9 @@ controller.set_boards()
 controller.video_gain = 1
 controller.video_speed = 1
 controller.camserver.set_server("localhost", 2405)
-controller.pci_file = os.path.join(azcam.db.systemfolder, "dspcode", "dsppci", "pci3.lod")
+controller.pci_file = os.path.join(
+    azcam.db.systemfolder, "dspcode", "dsppci", "pci3.lod"
+)
 controller.timing_file = timingfile
 
 # ****************************************************************
@@ -161,7 +174,9 @@ exposure.display_image = 0
 exposure.image.server_type = "dataserver"
 remote_imageserver_host = "10.30.1.2"
 remote_imageserver_port = 6543
-exposure.set_remote_imageserver(remote_imageserver_host, remote_imageserver_port, "azcamimage.fits")
+exposure.set_remote_imageserver(
+    remote_imageserver_host, remote_imageserver_port, "azcamimage.fits"
+)
 # exposure.set_remote_imageserver()
 
 # ****************************************************************

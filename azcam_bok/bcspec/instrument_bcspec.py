@@ -312,7 +312,9 @@ class InstrumentServerInterface(object):
         """
 
         try:
-            self.socket.send(str.encode(Command + Terminator))  # send command with terminator
+            self.socket.send(
+                str.encode(Command + Terminator)
+            )  # send command with terminator
             return ["OK"]
         except Exception:
             self.close()
