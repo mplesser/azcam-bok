@@ -8,7 +8,6 @@ import azcam
 import azcam.server
 import azcam.shortcuts
 from azcam.cmdserver import CommandServer
-from azcam.genpars import GenPars
 from azcam.system import System
 from azcam_webserver.web_server import WebServer
 from azcam_arc.controller_arc import ControllerArc
@@ -59,9 +58,7 @@ if option == "menu":
 CSS = 0
 if "90primeone" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_one.ini")
-    template = os.path.join(
-        azcam.db.datafolder, "templates", "FitsTemplate_90PrimeOne_master.txt"
-    )
+    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90PrimeOne_master.txt")
     timingfile = os.path.join(
         azcam.db.systemfolder,
         "dspcode",
@@ -71,27 +68,21 @@ if "90primeone" in option:
     cmdport = 2432
 elif "normal" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_normal.ini")
-    template = os.path.join(
-        azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt"
-    )
+    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt")
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_90prime", "90Prime_config0.lod"
     )
     cmdport = 2402
 elif "fast" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_fast.ini")
-    template = os.path.join(
-        azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt"
-    )
+    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt")
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_fast", "90Prime_config1.lod"
     )
     cmdport = 2402
 elif "overscan" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_overscan.ini")
-    template = os.path.join(
-        azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt"
-    )
+    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt")
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_90prime", "90Prime_config0.lod"
     )
@@ -100,9 +91,7 @@ elif "css" in option:
     print("90Prime for CSS")
     CSS = 1
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_css.ini")
-    template = os.path.join(
-        azcam.db.datafolder, "templates", "FitsTemplate_90Prime_css.txt"
-    )
+    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_css.txt")
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_90prime", "90Prime_config0.lod"
     )
@@ -140,9 +129,7 @@ controller.set_boards()
 controller.video_gain = 1
 controller.video_speed = 1
 controller.camserver.set_server("localhost", 2405)
-controller.pci_file = os.path.join(
-    azcam.db.systemfolder, "dspcode", "dsppci", "pci3.lod"
-)
+controller.pci_file = os.path.join(azcam.db.systemfolder, "dspcode", "dsppci", "pci3.lod")
 controller.timing_file = timingfile
 
 # ****************************************************************
@@ -174,9 +161,7 @@ exposure.display_image = 0
 exposure.image.server_type = "dataserver"
 remote_imageserver_host = "10.30.1.2"
 remote_imageserver_port = 6543
-exposure.set_remote_imageserver(
-    remote_imageserver_host, remote_imageserver_port, "azcamimage.fits"
-)
+exposure.set_remote_imageserver(remote_imageserver_host, remote_imageserver_port, "azcamimage.fits")
 # exposure.set_remote_imageserver()
 
 # ****************************************************************
@@ -240,10 +225,9 @@ if CSS:
 # ****************************************************************
 # read par file
 # ****************************************************************
-azcam.db.genpars = GenPars()
-pardict = azcam.db.genpars.parfile_read(parfile)["azcamserver"]
+pardict = azcam.api.config.parfile_read(parfile)["azcamserver"]
 azcam.utils.update_pars(0, pardict)
-wd = azcam.db.genpars.get_par(pardict, "wd", "default")
+wd = azcam.api.config.get_par(pardict, "wd", "default")
 azcam.utils.curdir(wd)
 
 # ****************************************************************

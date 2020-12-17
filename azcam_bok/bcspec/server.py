@@ -7,7 +7,6 @@ import azcam
 import azcam.server
 import azcam.shortcuts
 from azcam.cmdserver import CommandServer
-from azcam.genpars import GenPars
 from azcam.system import System
 from azcam_webserver.web_server import WebServer
 
@@ -62,12 +61,8 @@ controller.video_gain = 1
 controller.video_speed = 1
 controller.camserver.set_server("10.30.1.34", 2405)
 # controller.camserver.set_server("bokccd5", 2405)
-controller.utility_file = os.path.join(
-    azcam.db.systemfolder, "dspcode", "dsputility", "util1.lod"
-)
-controller.pci_file = os.path.join(
-    azcam.db.systemfolder, "dspcode", "dsppci", "pci1.lod"
-)
+controller.utility_file = os.path.join(azcam.db.systemfolder, "dspcode", "dsputility", "util1.lod")
+controller.pci_file = os.path.join(azcam.db.systemfolder, "dspcode", "dsppci", "pci1.lod")
 controller.timing_file = os.path.join(
     azcam.db.systemfolder, "dspcode", "dsptiming", "tim1_norm_LR.lod"
 )
@@ -90,9 +85,7 @@ exposure.folder = azcam.db.datafolder
 exposure.folder = "/home/bokobs"
 remote_imageserver_host = "10.30.1.2"  # bart
 remote_imageserver_port = 6543
-exposure.set_remote_imageserver(
-    remote_imageserver_host, remote_imageserver_port, "azcamimage.fits"
-)
+exposure.set_remote_imageserver(remote_imageserver_host, remote_imageserver_port, "azcamimage.fits")
 # exposure.set_remote_imageserver()
 ref1 = 1.0
 ref2 = 1.0
@@ -134,9 +127,7 @@ telescope = BokTCS()
 # ****************************************************************
 # system header template
 # ****************************************************************
-template = os.path.join(
-    azcam.db.datafolder, "templates", "FitsTemplate_bcspec_master.txt"
-)
+template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_bcspec_master.txt")
 system = System("bcspec", template)
 system.set_keyword("DEWAR", "bcspec", "Dewar name")
 
@@ -148,10 +139,9 @@ display = Ds9Display()
 # ****************************************************************
 # read par file
 # ****************************************************************
-azcam.db.genpars = GenPars()
-pardict = azcam.db.genpars.parfile_read(azcam.db.parfile)["azcamserver"]
+pardict = azcam.api.config.parfile_read(azcam.db.parfile)["azcamserver"]
 azcam.utils.update_pars(0, pardict)
-wd = azcam.db.genpars.get_par(pardict, "wd", "default")
+wd = azcam.api.config.get_par(pardict, "wd", "default")
 azcam.utils.curdir(wd)
 
 # ****************************************************************
