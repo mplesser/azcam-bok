@@ -5,7 +5,7 @@ import types
 
 import azcam
 import azcam.server
-import azcam.shortcuts
+import azcam.shortcuts_server
 from azcam.cmdserver import CommandServer
 from azcam.system import System
 from azcam_webserver.web_server import WebServer
@@ -78,8 +78,8 @@ tempcon.set_calibrations([1, 1, 3])
 # exposure
 # ****************************************************************
 exposure = ExposureArc()
-exposure.filetype = azcam.db.filetypes["FITS"]
-exposure.image.filetype = azcam.db.filetypes["FITS"]
+exposure.filetype = exposure.filetypes["FITS"]
+exposure.image.filetype = exposure.filetypes["FITS"]
 exposure.display_image = 0
 exposure.folder = azcam.db.datafolder
 exposure.folder = "/home/bokobs"

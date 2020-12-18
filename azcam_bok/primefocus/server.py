@@ -6,7 +6,7 @@ import sys
 
 import azcam
 import azcam.server
-import azcam.shortcuts
+import azcam.shortcuts_server
 from azcam.cmdserver import CommandServer
 from azcam.system import System
 from azcam_webserver.web_server import WebServer
@@ -60,10 +60,7 @@ if "90primeone" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_one.ini")
     template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90PrimeOne_master.txt")
     timingfile = os.path.join(
-        azcam.db.systemfolder,
-        "dspcode",
-        "dsptiming_90primeone",
-        "90PrimeOne_config0.lod",
+        azcam.db.systemfolder, "dspcode", "dsptiming_90primeone", "90PrimeOne_config0.lod",
     )
     cmdport = 2432
 elif "normal" in option:
@@ -154,8 +151,8 @@ tempcon.init_commands = [
 # exposure
 # ****************************************************************
 exposure = ExposureArc()
-exposure.filetype = azcam.db.filetypes["MEF"]
-exposure.image.filetype = azcam.db.filetypes["MEF"]
+exposure.filetype = exposure.filetypes["MEF"]
+exposure.image.filetype = exposure.filetypes["MEF"]
 exposure.update_headers_in_background = 1
 exposure.display_image = 0
 exposure.image.server_type = "dataserver"
@@ -178,7 +175,7 @@ focus.focus_type = "step"
 from azcam_bok.primefocus.instrument_pf import PrimeFocusInstrument
 
 instrument = PrimeFocusInstrument()
-azcam.db.coord_object = "instrument"
+exposure.image.focalplane.coord_object = "instrument"
 
 # ****************************************************************
 # telescope
