@@ -60,7 +60,10 @@ if "90primeone" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_one.ini")
     template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90PrimeOne_master.txt")
     timingfile = os.path.join(
-        azcam.db.systemfolder, "dspcode", "dsptiming_90primeone", "90PrimeOne_config0.lod",
+        azcam.db.systemfolder,
+        "dspcode",
+        "dsptiming_90primeone",
+        "90PrimeOne_config0.lod",
     )
     cmdport = 2432
 elif "normal" in option:
@@ -222,10 +225,8 @@ if CSS:
 # ****************************************************************
 # read par file
 # ****************************************************************
-pardict = azcam.api.config.parfile_read(parfile)["azcamserver"]
-azcam.utils.update_pars(0, pardict)
-wd = azcam.api.config.get_par(pardict, "wd", "default")
-azcam.utils.curdir(wd)
+pardict = azcam.api.config.parfile_read(parfile)
+azcam.api.config.update_pars(0, pardict["azcamserver"])
 
 # ****************************************************************
 # web server
