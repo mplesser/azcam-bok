@@ -28,7 +28,7 @@ azcam.db.systemfolder = os.path.dirname(__file__)
 azcam.db.systemfolder = azcam.utils.fix_path(azcam.db.systemfolder)
 azcam.db.datafolder = os.path.join("/data", azcam.db.systemname)
 azcam.db.datafolder = azcam.utils.fix_path(azcam.db.datafolder)
-azcam.db.parfile = f"{azcam.db.datafolder}/parameters_{azcam.db.systemname}.ini"
+parfile = f"{azcam.db.datafolder}/parameters_{azcam.db.systemname}.ini"
 
 # ****************************************************************
 # enable logging
@@ -139,8 +139,8 @@ display = Ds9Display()
 # ****************************************************************
 # read par file
 # ****************************************************************
-pardict = azcam.api.config.parfile_read(azcam.db.parfile)
-azcam.api.config.update_pars(0, pardict["azcamserver"])
+pardict = azcam.api.config.read_parfile(parfile)
+azcam.api.config.update_pars(0, "azcamserver")
 
 # ****************************************************************
 # web server

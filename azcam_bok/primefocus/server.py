@@ -98,7 +98,7 @@ elif "css" in option:
     cmdport = 2422
 else:
     raise azcam.AzcamError("bad server configuration")
-azcam.db.parfile = parfile
+parfile = parfile
 
 # ****************************************************************
 # enable logging
@@ -225,8 +225,8 @@ if CSS:
 # ****************************************************************
 # read par file
 # ****************************************************************
-pardict = azcam.api.config.parfile_read(parfile)
-azcam.api.config.update_pars(0, pardict["azcamserver"])
+pardict = azcam.api.config.read_parfile(parfile)
+azcam.api.config.update_pars(0, "azcamserver")
 
 # ****************************************************************
 # web server

@@ -16,7 +16,7 @@ from azcam_observe.observe import Observe
 azcam.db.systemname = "bcspec"
 azcam.db.systemfolder = f"{os.path.dirname(__file__)}"
 azcam.db.datafolder = os.path.join("/data", azcam.db.systemname)
-azcam.db.parfile = f"{azcam.db.datafolder}/parameters_{azcam.db.systemname}.ini"
+parfile = f"{azcam.db.datafolder}/parameters_{azcam.db.systemname}.ini"
 
 # ****************************************************************
 # start logging
@@ -51,5 +51,5 @@ else:
 # ****************************************************************
 # read par file
 # ****************************************************************
-pardict = azcam.api.config.parfile_read(azcam.db.parfile)
-azcam.api.config.update_pars(0, pardict["azcamconsole"])
+pardict = azcam.api.config.read_parfile(parfile)
+azcam.api.config.update_pars(0, "azcamconsole")
