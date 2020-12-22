@@ -19,7 +19,7 @@ import azcam_exptool
 import azcam_status
 import azcam_observe.webobs
 
-from azcam_focus.focus_server import Focus
+from azcam_focus.focus import Focus
 
 # ****************************************************************
 # parse command line arguments
@@ -61,10 +61,7 @@ if "90primeone" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_one.ini")
     template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90PrimeOne_master.txt")
     timingfile = os.path.join(
-        azcam.db.systemfolder,
-        "dspcode",
-        "dsptiming_90primeone",
-        "90PrimeOne_config0.lod",
+        azcam.db.systemfolder, "dspcode", "dsptiming_90primeone", "90PrimeOne_config0.lod",
     )
     cmdport = 2432
 elif "normal" in option:
@@ -166,7 +163,7 @@ exposure.set_remote_imageserver(remote_imageserver_host, remote_imageserver_port
 # exposure.set_remote_imageserver()
 
 # ****************************************************************
-# focus script - server-side
+# focus
 # ****************************************************************
 focus = Focus()
 azcam.db.cli_cmds["focus"] = focus
