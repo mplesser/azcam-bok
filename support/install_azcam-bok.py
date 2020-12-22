@@ -25,7 +25,7 @@ repos = {
     "azcam-status": github_lesser,
     "azcam-expstatus": github_lesser,
     "azcam-observe": github_lesser,
-    "azcam-webobs": github_lesser,
+    "azcam-webserver": github_lesser,
     "azcam-focus": github_lesser,
     "azcam-bok": github_lesser,
 }
@@ -52,7 +52,9 @@ if INSTALL:
         else:
             cmd = f"pip install -e {root}\\{repo}"
         subprocess.call(
-            cmd, shell=False, cwd=f"{root}",
+            cmd,
+            shell=False,
+            cwd=f"{root}",
         )
 
 input("\nPress Enter to continue...")

@@ -17,7 +17,8 @@ from azcam_cryocon.tempcon_cryoconm24 import TempConCryoCon
 from azcam_ds9.ds9display import Ds9Display
 import azcam_exptool
 import azcam_status
-import azcam_webobs
+import azcam_observe.webobs
+
 from azcam_focus.focus_server import Focus
 
 # ****************************************************************

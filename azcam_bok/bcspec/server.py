@@ -18,7 +18,8 @@ from azcam_bok.common.telescope_bok import BokTCS
 from azcam_ds9.ds9display import Ds9Display
 import azcam_exptool
 import azcam_status
-import azcam_webobs
+import azcam_observe.webobs
+
 
 # ****************************************************************
 # define folders for system
