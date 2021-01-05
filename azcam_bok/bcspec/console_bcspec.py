@@ -1,4 +1,4 @@
-# azcamconsole config file
+# azcamconsole config file for mont4k
 
 import datetime
 import os
@@ -8,16 +8,24 @@ import azcam
 import azcam.console
 import azcam.shortcuts_console
 from azcam_ds9.ds9display import Ds9Display
-from azcam_focus.focus import Focus
 from azcam_observe.observe import Observe
 
 # ****************************************************************
 # files and folders
 # ****************************************************************
-azcam.db.systemname = "90prime"
+azcam.db.systemname = "bcspec"
 azcam.db.systemfolder = f"{os.path.dirname(__file__)}"
 azcam.db.datafolder = os.path.join("/data", azcam.db.systemname)
-parfile = f"{azcam.db.datafolder}/parameters_{azcam.db.systemname}_console.ini"
+parfile = f"{azcam.db.datafolder}/parameters_{azcam.db.systemname}.ini"
+
+# ****************************************************************
+# add folders to search path
+# ****************************************************************
+for p in ["bcspec"]:
+    folder = os.path.join(azcam.db.systemfolder, p)
+    azcam.utils.add_searchfolder(folder, 0)
+folder = os.path.abspath(os.path.join(azcam.db.systemfolder, "../common"))
+azcam.utils.add_searchfolder(folder, 0)
 
 # ****************************************************************
 # start logging
@@ -38,27 +46,12 @@ dthread.start()  # thread just for speed
 # observe script
 # ****************************************************************
 observe = Observe()
-observe.move_telescope_during_readout = 1
 azcam.db.cli_cmds["observe"] = observe
-
-# ****************************************************************
-# focus script
-# ****************************************************************
-focus = Focus()
-azcam.db.cli_cmds["focus"] = focus
-focus.focus_component = "instrument"
-focus.focus_type = "step"
 
 # ****************************************************************
 # try to connect to azcamserver
 # ****************************************************************
-ports = [2402, 2412, 2422, 2432]
-connected = 0
-for port in ports:
-    connected = azcam.api.server.connect(port=port)
-    if connected:
-        break
-
+connected = azcam.api.server.connect(port=2442)
 if connected:
     azcam.log("Connected to azcamserver")
 else:

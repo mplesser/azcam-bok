@@ -6,6 +6,11 @@ Usage: Execute this file from File Explorer
 
 import os
 import sys
+from pathlib import Path, PurePosixPath
+
+rootfolder = Path(__file__).resolve().parent.parent
+rootfolder = rootfolder / "azcam_bok/bcspec"
+rootfolder = str(PurePosixPath(rootfolder))
 
 # select which python to use (virtual environments)
 python = "ipython.exe"
@@ -20,7 +25,8 @@ else:
 
 profile = "azcamconsole"
 
-import_command = f"import azcam_bok.bcspec.console; from azcam.cli import *"
+imports = f"import sys; sys.path.append('{rootfolder}')"
+import_command = f"{imports};import console_bcspec; from azcam.cli import *"
 
 # execute
 cl = (

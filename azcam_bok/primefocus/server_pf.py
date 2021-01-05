@@ -12,7 +12,6 @@ from azcam.system import System
 from azcam_webserver.web_server import WebServer
 from azcam_arc.controller_arc import ControllerArc
 from azcam_arc.exposure_arc import ExposureArc
-from azcam_bok.common.telescope_bok import BokTCS
 from azcam_cryocon.tempcon_cryoconm24 import TempConCryoCon
 from azcam_ds9.ds9display import Ds9Display
 import azcam_exptool
@@ -41,6 +40,15 @@ azcam.db.systemfolder = os.path.dirname(__file__)
 azcam.db.systemfolder = azcam.utils.fix_path(azcam.db.systemfolder)
 azcam.db.datafolder = os.path.join("/data", azcam.db.systemname)
 azcam.db.datafolder = azcam.utils.fix_path(azcam.db.datafolder)
+
+# ****************************************************************
+# add folders to search path
+# ****************************************************************
+for p in ["primefocus"]:
+    folder = os.path.join(azcam.db.systemfolder, p)
+    azcam.utils.add_searchfolder(folder, 0)
+folder = os.path.abspath(os.path.join(azcam.db.systemfolder, "../common"))
+azcam.utils.add_searchfolder(folder, 0)
 
 # ****************************************************************
 # configuration menu
@@ -173,7 +181,7 @@ focus.focus_type = "step"
 # ****************************************************************
 # instrument
 # ****************************************************************
-from azcam_bok.primefocus.instrument_pf import PrimeFocusInstrument
+from instrument_pf import PrimeFocusInstrument
 
 instrument = PrimeFocusInstrument()
 exposure.image.focalplane.coord_object = "instrument"
@@ -181,6 +189,8 @@ exposure.image.focalplane.coord_object = "instrument"
 # ****************************************************************
 # telescope
 # ****************************************************************
+from telescope_bok import BokTCS
+
 telescope = BokTCS()
 
 # ****************************************************************
@@ -193,11 +203,11 @@ system.set_keyword("DEWAR", "90prime", "Dewar name")
 # detector
 # ****************************************************************
 if "90primeone" in option:
-    from azcam_bok.primefocus.detector_bok90prime import detector_bok90prime_one
+    from detector_bok90prime import detector_bok90prime_one
 
     exposure.set_detpars(detector_bok90prime_one)
 else:
-    from azcam_bok.primefocus.detector_bok90prime import detector_bok90prime
+    from detector_bok90prime import detector_bok90prime
 
     if "overscan" in option:
         detector_bok90prime["format"] = [4032 * 2, 6, 0, 20, 4096 * 2, 0, 0, 20, 0]
@@ -212,7 +222,7 @@ display = Ds9Display()
 # system-specific
 # ****************************************************************
 if CSS:
-    from azcam_bok.primefocus.css import CSS
+    from css import CSS
 
     css = CSS()
     azcam.db.cli_cmds["css"] = css
@@ -232,19 +242,19 @@ azcam.api.config.update_pars(0, "azcamserver")
 webserver = WebServer()
 azcam_exptool.load()
 azcam_status.load()
-azcam_webobs.load()
+azcam_observe.webobs.load()
 webserver.start()
 
 # ****************************************************************
 # camera server
 # ****************************************************************
-import azcam_bok.primefocus.restart_cameraserver
+import restart_cameraserver
 
 # ****************************************************************
 # GUIs
 # ****************************************************************
 if 1:
-    import azcam_bok.common.start_azcamtool
+    import start_azcamtool
 
 # ****************************************************************
 # finish

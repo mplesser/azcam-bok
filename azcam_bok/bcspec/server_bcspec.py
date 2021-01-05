@@ -13,8 +13,7 @@ from azcam_webserver.web_server import WebServer
 from azcam_arc.controller_arc import ControllerArc
 from azcam_arc.exposure_arc import ExposureArc
 from azcam_arc.tempcon_arc import TempConArc
-from azcam_bok.bcspec.instrument_bcspec import BCSpecInstrument
-from azcam_bok.common.telescope_bok import BokTCS
+from instrument_bcspec import BCSpecInstrument
 from azcam_ds9.ds9display import Ds9Display
 import azcam_exptool
 import azcam_status
@@ -30,6 +29,15 @@ azcam.db.systemfolder = azcam.utils.fix_path(azcam.db.systemfolder)
 azcam.db.datafolder = os.path.join("/data", azcam.db.systemname)
 azcam.db.datafolder = azcam.utils.fix_path(azcam.db.datafolder)
 parfile = f"{azcam.db.datafolder}/parameters_{azcam.db.systemname}.ini"
+
+# ****************************************************************
+# add folders to search path
+# ****************************************************************
+for p in ["bcspec"]:
+    folder = os.path.join(azcam.db.systemfolder, p)
+    azcam.utils.add_searchfolder(folder, 0)
+folder = os.path.abspath(os.path.join(azcam.db.systemfolder, "../common"))
+azcam.utils.add_searchfolder(folder, 0)
 
 # ****************************************************************
 # enable logging
@@ -123,6 +131,8 @@ instrument = BCSpecInstrument()
 # ****************************************************************
 # telescope
 # ****************************************************************
+from telescope_bok import BokTCS
+
 telescope = BokTCS()
 
 # ****************************************************************
@@ -149,14 +159,14 @@ azcam.api.config.update_pars(0, "azcamserver")
 webserver = WebServer()
 azcam_exptool.load()
 azcam_status.load()
-azcam_webobs.load()
+azcam_observe.webobs.load()
 webserver.start()
 
 # ****************************************************************
 # GUIs
 # ****************************************************************
 if 1:
-    import azcam_bok.common.start_azcamtool
+    import start_azcamtool
 
 # ****************************************************************
 # finish
