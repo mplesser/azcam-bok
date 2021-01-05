@@ -21,7 +21,6 @@ if len(sys.argv) > 1:
     arguments = sys.argv[1:]
 else:
     arguments = [""]
-    # arguments = ["-system VIRUS -data \data"]
 
 profile = "azcamserver"
 
