@@ -17,7 +17,6 @@ from azcam_ds9.ds9display import Ds9Display
 import azcam_exptool
 import azcam_status
 import azcam_observe.webobs
-
 from azcam_focus.focus import Focus
 
 # ****************************************************************
@@ -47,8 +46,8 @@ azcam.db.datafolder = azcam.utils.fix_path(azcam.db.datafolder)
 for p in ["primefocus"]:
     folder = os.path.join(azcam.db.systemfolder, p)
     azcam.utils.add_searchfolder(folder, 0)
-folder = os.path.abspath(os.path.join(azcam.db.systemfolder, "../common"))
-azcam.utils.add_searchfolder(folder, 0)
+commonfolder = os.path.abspath(os.path.join(azcam.db.systemfolder, "../common"))
+azcam.utils.add_searchfolder(commonfolder, 0)
 
 # ****************************************************************
 # configuration menu
@@ -67,53 +66,48 @@ if option == "menu":
 CSS = 0
 if "90primeone" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_one.ini")
-    template = os.path.join(
-        azcam.db.datafolder, "templates", "FitsTemplate_90PrimeOne_master.txt"
-    )
+    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90PrimeOne_master.txt")
     timingfile = os.path.join(
         azcam.db.systemfolder,
         "dspcode",
         "dsptiming_90primeone",
         "90PrimeOne_config0.lod",
     )
+    azcam.db.servermode = "90primeone"
     cmdport = 2432
 elif "normal" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_normal.ini")
-    template = os.path.join(
-        azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt"
-    )
+    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt")
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_90prime", "90Prime_config0.lod"
     )
+    azcam.db.servermode = "normal"
     cmdport = 2402
 elif "fast" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_fast.ini")
-    template = os.path.join(
-        azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt"
-    )
+    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt")
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_fast", "90Prime_config1.lod"
     )
+    azcam.db.servermode = "fast"
     cmdport = 2402
 elif "overscan" in option:
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_overscan.ini")
-    template = os.path.join(
-        azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt"
-    )
+    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_master.txt")
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_90prime", "90Prime_config0.lod"
     )
+    azcam.db.servermode = "overscan"
     cmdport = 2402
 elif "css" in option:
     print("90Prime for CSS")
     CSS = 1
     parfile = os.path.join(azcam.db.datafolder, "parameters_90prime_css.ini")
-    template = os.path.join(
-        azcam.db.datafolder, "templates", "FitsTemplate_90Prime_css.txt"
-    )
+    template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_90Prime_css.txt")
     timingfile = os.path.join(
         azcam.db.systemfolder, "dspcode", "dsptiming_90prime", "90Prime_config0.lod"
     )
+    azcam.db.servermode = "CSS"
     cmdport = 2422
 else:
     raise azcam.AzcamError("bad server configuration")
@@ -148,9 +142,7 @@ controller.set_boards()
 controller.video_gain = 1
 controller.video_speed = 1
 controller.camserver.set_server("localhost", 2405)
-controller.pci_file = os.path.join(
-    azcam.db.systemfolder, "dspcode", "dsppci", "pci3.lod"
-)
+controller.pci_file = os.path.join(azcam.db.systemfolder, "dspcode", "dsppci", "pci3.lod")
 controller.timing_file = timingfile
 
 # ****************************************************************
@@ -182,9 +174,7 @@ exposure.display_image = 0
 exposure.image.server_type = "dataserver"
 remote_imageserver_host = "10.30.1.2"
 remote_imageserver_port = 6543
-exposure.set_remote_imageserver(
-    remote_imageserver_host, remote_imageserver_port, "azcamimage.fits"
-)
+exposure.set_remote_imageserver(remote_imageserver_host, remote_imageserver_port, "azcamimage.fits")
 # exposure.set_remote_imageserver()
 
 # ****************************************************************
@@ -257,10 +247,13 @@ azcam.api.config.update_pars(0, "azcamserver")
 # web server
 # ****************************************************************
 webserver = WebServer()
+webserver.templates_folder = commonfolder
+webserver.index = f"index_Bok.html"
+webserver.port = 2403  # common port for all configurations
+webserver.start()
 azcam_exptool.load()
 azcam_status.load()
 azcam_observe.webobs.load()
-webserver.start()
 
 # ****************************************************************
 # camera server

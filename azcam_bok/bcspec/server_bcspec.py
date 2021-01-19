@@ -13,7 +13,6 @@ from azcam_webserver.web_server import WebServer
 from azcam_arc.controller_arc import ControllerArc
 from azcam_arc.exposure_arc import ExposureArc
 from azcam_arc.tempcon_arc import TempConArc
-from instrument_bcspec import BCSpecInstrument
 from azcam_ds9.ds9display import Ds9Display
 import azcam_exptool
 import azcam_status
@@ -24,6 +23,7 @@ import azcam_observe.webobs
 # define folders for system
 # ****************************************************************
 azcam.db.systemname = "bcspec"
+azcam.db.servermode = azcam.db.systemname
 azcam.db.systemfolder = os.path.dirname(__file__)
 azcam.db.systemfolder = azcam.utils.fix_path(azcam.db.systemfolder)
 azcam.db.datafolder = os.path.join("/data", azcam.db.systemname)
@@ -36,8 +36,8 @@ parfile = f"{azcam.db.datafolder}/parameters_{azcam.db.systemname}.ini"
 for p in ["bcspec"]:
     folder = os.path.join(azcam.db.systemfolder, p)
     azcam.utils.add_searchfolder(folder, 0)
-folder = os.path.abspath(os.path.join(azcam.db.systemfolder, "../common"))
-azcam.utils.add_searchfolder(folder, 0)
+commonfolder = os.path.abspath(os.path.join(azcam.db.systemfolder, "../common"))
+azcam.utils.add_searchfolder(commonfolder, 0)
 
 # ****************************************************************
 # enable logging
@@ -70,12 +70,8 @@ controller.video_gain = 1
 controller.video_speed = 1
 controller.camserver.set_server("10.30.1.34", 2405)
 # controller.camserver.set_server("bokccd5", 2405)
-controller.utility_file = os.path.join(
-    azcam.db.systemfolder, "dspcode", "dsputility", "util1.lod"
-)
-controller.pci_file = os.path.join(
-    azcam.db.systemfolder, "dspcode", "dsppci", "pci1.lod"
-)
+controller.utility_file = os.path.join(azcam.db.systemfolder, "dspcode", "dsputility", "util1.lod")
+controller.pci_file = os.path.join(azcam.db.systemfolder, "dspcode", "dsppci", "pci1.lod")
 controller.timing_file = os.path.join(
     azcam.db.systemfolder, "dspcode", "dsptiming", "tim1_norm_LR.lod"
 )
@@ -98,9 +94,7 @@ exposure.folder = azcam.db.datafolder
 exposure.folder = "/home/bokobs"
 remote_imageserver_host = "10.30.1.2"  # bart
 remote_imageserver_port = 6543
-exposure.set_remote_imageserver(
-    remote_imageserver_host, remote_imageserver_port, "azcamimage.fits"
-)
+exposure.set_remote_imageserver(remote_imageserver_host, remote_imageserver_port, "azcamimage.fits")
 # exposure.set_remote_imageserver()
 ref1 = 1.0
 ref2 = 1.0
@@ -132,6 +126,8 @@ exposure.set_detpars(detector_bcspec)
 # ****************************************************************
 # instrument
 # ****************************************************************
+from instrument_bcspec import BCSpecInstrument
+
 instrument = BCSpecInstrument()
 
 # ****************************************************************
@@ -144,9 +140,7 @@ telescope = BokTCS()
 # ****************************************************************
 # system header template
 # ****************************************************************
-template = os.path.join(
-    azcam.db.datafolder, "templates", "FitsTemplate_bcspec_master.txt"
-)
+template = os.path.join(azcam.db.datafolder, "templates", "FitsTemplate_bcspec_master.txt")
 system = System("bcspec", template)
 system.set_keyword("DEWAR", "bcspec", "Dewar name")
 
@@ -165,10 +159,13 @@ azcam.api.config.update_pars(0, "azcamserver")
 # web server
 # ****************************************************************
 webserver = WebServer()
+webserver.templates_folder = commonfolder
+webserver.index = f"index_Bok.html"
+webserver.port = 2403  # common port for all configurations
+webserver.start()
 azcam_exptool.load()
 azcam_status.load()
 azcam_observe.webobs.load()
-webserver.start()
 
 # ****************************************************************
 # GUIs
